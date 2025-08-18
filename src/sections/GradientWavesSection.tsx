@@ -4,7 +4,8 @@ import type { SectionDefinition } from './types'
 export const gradientWavesSection: SectionDefinition = {
   id: 'gradient-waves',
   title: 'Gradient Waves',
-  description: 'Flowing animated gradients that ripple across the canvas like gentle waves. This foundational piece explores the basic principles of computational color theory and smooth motion.',
+  description: 'just waves',
+  bodyText: 'Flowing animated gradients that ripple across the canvas like gentle waves. This foundational piece explores the basic principles of computational color theory and smooth motion.',
   order: 1,
   component: () => (
     <MovingGradientCanvas

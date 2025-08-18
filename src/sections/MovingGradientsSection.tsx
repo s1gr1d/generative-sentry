@@ -4,7 +4,8 @@ import type { SectionDefinition } from './types'
 export const movingGradientsSection: SectionDefinition = {
   id: 'moving-gradients',
   title: 'Moving Gradients',
-  description: 'Dynamic color transitions powered by shader programming. Watch as colors blend and flow in smooth, hypnotic motions that showcase the beauty of computational art and real-time graphics rendering.',
+  description: 'moving gradients',
+  bodyText: 'Dynamic color transitions powered by shader programming. Watch as colors blend and flow in smooth, hypnotic motions that showcase the beauty of computational art and real-time graphics rendering.',
   order: 2,
   component: () => (
     <MovingGradientCanvas

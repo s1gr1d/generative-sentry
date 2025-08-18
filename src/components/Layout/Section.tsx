@@ -4,12 +4,12 @@ import styles from './Section.module.css'
 interface SectionProps {
   id: string
   title: string
-  description: string
+  bodyText: string
   children: ReactNode
   className?: string
 }
 
-export function Section({ id, title, description, children, className }: SectionProps) {
+export function Section({ id, title, bodyText, children, className }: SectionProps) {
   return (
     <section 
       className={`${styles.section} ${className || ''}`}
@@ -22,7 +22,7 @@ export function Section({ id, title, description, children, className }: Section
         <div className={styles.textContainer}>
           <div className={styles.textContent}>
             <h2 className={styles.title}>{title}</h2>
-            <p className={styles.description}>{description}</p>
+            <p className={styles.description}>{bodyText}</p>
           </div>
         </div>
       </div>

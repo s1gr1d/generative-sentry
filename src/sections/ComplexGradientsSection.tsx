@@ -4,7 +4,8 @@ import type { SectionDefinition } from './types'
 export const complexGradientsSection: SectionDefinition = {
   id: 'complex-gradients',
   title: 'Complex Gradients',
-  description: 'Multi-layered color effects with advanced shader techniques. This piece combines multiple gradient algorithms to create complex, sophisticated visual patterns that demonstrate the power of modern GPU computing.',
+  description: 'complex gradients',
+  bodyText: 'Multi-layered color effects with advanced shader techniques. This piece combines multiple gradient algorithms to create complex, sophisticated visual patterns that demonstrate the power of modern GPU computing.',
   order: 3,
   component: () => (
     <MovingGradientCanvas

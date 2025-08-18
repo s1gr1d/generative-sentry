@@ -9,7 +9,7 @@ export function App() {
           key={section.id}
           id={section.id}
           title={section.title}
-          description={section.description}
+          bodyText={section.bodyText}
         >
           {section.component()}
         </Section>

@@ -4,7 +4,8 @@ import type { SectionDefinition } from './types'
 export const interactiveGradientsSection: SectionDefinition = {
   id: 'interactive-gradients',
   title: 'Interactive Gradients',
-  description: 'Responsive color fields that react to your mouse movements. Move your cursor across the canvas to influence the flow and intensity of the gradients, creating a unique interactive art experience.',
+  description: 'interactive gradients',
+  bodyText: 'Responsive color fields that react to your mouse movements. Move your cursor across the canvas to influence the flow and intensity of the gradients, creating a unique interactive art experience.',
   order: 4,
   component: () => (
     <MovingGradientCanvas
