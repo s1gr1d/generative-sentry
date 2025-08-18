@@ -1,0 +1,143 @@
+.section {
+  height: 100vh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  position: relative;
+  overflow: hidden;
+}
+
+.content {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  align-items: stretch;
+}
+
+.artContainer {
+  position: relative;
+  background: var(--color-rich-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.textContainer {
+  background: var(--color-background-grey);
+  padding: 3rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.textContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    var(--color-blurple) 0%,
+    var(--color-lt-pink) 50%,
+    var(--color-dk-violet) 100%
+  );
+}
+
+.textContent {
+  position: relative;
+  z-index: 1;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.2;
+  color: var(--color-rich-black);
+  background: linear-gradient(
+    135deg,
+    var(--color-dk-violet) 0%,
+    var(--color-blurple) 50%,
+    var(--color-lt-pink) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.description {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--color-rich-black);
+  margin: 0;
+  opacity: 0.8;
+  max-width: 300px;
+}
+
+
+.section:nth-child(even) .textContainer::before {
+  left: auto;
+  right: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .content {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+  }
+  
+  .section:nth-child(even) .content {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+  }
+  
+  .textContainer {
+    padding: 2rem;
+    min-height: 200px;
+  }
+  
+  .textContainer::before {
+    left: 0;
+    right: auto;
+    width: 100%;
+    height: 2px;
+    top: 0;
+    bottom: auto;
+    background: linear-gradient(
+      to right,
+      var(--color-blurple) 0%,
+      var(--color-lt-pink) 50%,
+      var(--color-dk-violet) 100%
+    );
+  }
+  
+  .section:nth-child(even) .textContainer::before {
+    left: 0;
+    right: auto;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+  
+  .description {
+    max-width: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .textContainer {
+    padding: 1.5rem;
+  }
+  
+  .title {
+    font-size: 1.75rem;
+  }
+  
+  .description {
+    font-size: 1rem;
+  }
+}

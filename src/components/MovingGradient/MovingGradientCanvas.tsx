@@ -1,39 +1,53 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { MovingGradient } from './MovingGradient'
-import type { MovingGradientProps } from './MovingGradient'
+import { MovingGradient, type MovingGradientProps } from './MovingGradient'
 import styles from './MovingGradient.module.css'
 
-export interface MovingGradientCanvasProps extends MovingGradientProps {
-  /** Additional CSS class name for the container */
+interface MovingGradientCanvasProps extends MovingGradientProps {
+  /** Additional CSS class name */
   className?: string
-  /** Custom styles for the container */
-  style?: React.CSSProperties
 }
 
 const MovingGradientCanvas: React.FC<MovingGradientCanvasProps> = ({
-  fullScreen = false,
   className,
-  style,
+  fullScreen,
+  width = 10,
+  height = 10,
   ...gradientProps
 }) => {
-  const containerClass = fullScreen 
-    ? `${styles.fullScreenContainer} ${className || ''}`.trim()
-    : `${styles.container} ${className || ''}`.trim()
+  const canvasStyle = fullScreen 
+    ? { 
+        position: 'fixed' as const, 
+        top: 0, 
+        left: 0, 
+        width: '100vw', 
+        height: '100vh', 
+        zIndex: -1,
+        background: '#000'
+      }
+    : { 
+        width: '100%', 
+        height: '100%', 
+        background: '#000'
+      }
 
   return (
-    <div className={containerClass} style={style}>
+    <div className={`${styles.container} ${fullScreen ? styles.fullScreen : ''} ${className || ''}`}>
+      <span className={styles.srOnly}>Complex moving gradient background with noise effects</span>
       <Canvas
+        style={canvasStyle}
         className={styles.canvas}
-        camera={{ position: [0, 0, 5], fov: 75 }}
-        gl={{ 
-          antialias: true,
-          alpha: true,
-          powerPreference: 'high-performance'
-        }}
-        dpr={[1, 2]} // Device pixel ratio for retina displays
+        camera={{ position: [0, 0, 1] }}
+        gl={{ antialias: true, alpha: false }}
       >
-        <MovingGradient fullScreen={fullScreen} {...gradientProps} />
+        <Suspense fallback={null}>
+          <MovingGradient
+            fullScreen={fullScreen}
+            width={width}
+            height={height}
+            {...gradientProps}
+          />
+        </Suspense>
       </Canvas>
     </div>
   )

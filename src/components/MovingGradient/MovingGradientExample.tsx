@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { MovingGradient2Canvas } from './MovingGradient2Canvas'
+import { MovingGradientCanvas } from './MovingGradientCanvas'
 import { type ColorCategory } from '@/utils/colorPalette'
-import styles from './MovingGradient2.module.css'
+import styles from './MovingGradient.module.css'
 
-const MovingGradient2Example: React.FC = () => {
+const MovingGradientExample: React.FC = () => {
   const [isFullScreen, setIsFullScreen] = useState(false)
   const [speed, setSpeed] = useState(1.0)
   const [noiseScale, setNoiseScale] = useState(3.0)
@@ -12,6 +12,8 @@ const MovingGradient2Example: React.FC = () => {
   const [colorCategory, setColorCategory] = useState<ColorCategory>('ALL')
   const [animateColors, setAnimateColors] = useState(false)
   const [colorAnimationSpeed, setColorAnimationSpeed] = useState(0.1)
+  const [isStatic, setIsStatic] = useState(true)
+  const [mouseInfluence, setMouseInfluence] = useState(1.0)
 
   const colorCategoryOptions: ColorCategory[] = [
     'ALL', 'PRIMARY', 'SECONDARY', 'TERTIARY', 
@@ -21,8 +23,8 @@ const MovingGradient2Example: React.FC = () => {
   return (
     <div className={styles.container}>
       <div className={styles.controls}>
-        <h2>MovingGradient2 - Complex Noise Effects</h2>
-        <p>Advanced gradient with fractal brownian motion and flowing effects</p>
+        <h2>MovingGradient - Interactive Mouse Effects</h2>
+        <p>Static gradient with mouse interaction creating smoky disruption trails</p>
         
         <div className={styles.controlGroup}>
           <label className={styles.label}>
@@ -37,18 +39,46 @@ const MovingGradient2Example: React.FC = () => {
 
         <div className={styles.controlGroup}>
           <label className={styles.label}>
-            Animation Speed: {speed.toFixed(1)}
+            <input
+              type="checkbox"
+              checked={isStatic}
+              onChange={(e) => setIsStatic(e.target.checked)}
+            />
+            Static Mode (Mouse Interaction Only)
+          </label>
+        </div>
+
+        <div className={styles.controlGroup}>
+          <label className={styles.label}>
+            Mouse Influence: {mouseInfluence.toFixed(2)}
             <input
               type="range"
-              min="0.1"
-              max="3.0"
+              min="0.0"
+              max="2.0"
               step="0.1"
-              value={speed}
-              onChange={(e) => setSpeed(parseFloat(e.target.value))}
+              value={mouseInfluence}
+              onChange={(e) => setMouseInfluence(parseFloat(e.target.value))}
               className={styles.slider}
             />
           </label>
         </div>
+
+        {!isStatic && (
+          <div className={styles.controlGroup}>
+            <label className={styles.label}>
+              Animation Speed: {speed.toFixed(1)}
+              <input
+                type="range"
+                min="0.1"
+                max="3.0"
+                step="0.1"
+                value={speed}
+                onChange={(e) => setSpeed(parseFloat(e.target.value))}
+                className={styles.slider}
+              />
+            </label>
+          </div>
+        )}
 
         <div className={styles.controlGroup}>
           <label className={styles.label}>
@@ -139,13 +169,19 @@ const MovingGradient2Example: React.FC = () => {
             </label>
           </div>
         )}
+
+        <div className={styles.controlGroup}>
+          <p style={{ fontSize: '0.8rem', opacity: 0.7, margin: '1rem 0 0 0' }}>
+            💡 <strong>Tip:</strong> Move your mouse over the gradient to see interactive effects!
+          </p>
+        </div>
       </div>
 
       {!isFullScreen && (
         <div className={styles.gradientContainer}>
-          <h3>Complex Noise Gradient</h3>
+          <h3>Interactive Mouse Gradient</h3>
           <div className={styles.gradientBox}>
-            <MovingGradient2Canvas
+            <MovingGradientCanvas
               speed={speed}
               noiseScale={noiseScale}
               flowIntensity={flowIntensity}
@@ -153,6 +189,8 @@ const MovingGradient2Example: React.FC = () => {
               colorCategory={colorCategory}
               animateColors={animateColors}
               colorAnimationSpeed={colorAnimationSpeed}
+              isStatic={isStatic}
+              mouseInfluence={mouseInfluence}
               width={8}
               height={6}
             />
@@ -161,7 +199,7 @@ const MovingGradient2Example: React.FC = () => {
       )}
 
       {isFullScreen && (
-        <MovingGradient2Canvas
+        <MovingGradientCanvas
           fullScreen
           speed={speed}
           noiseScale={noiseScale}
@@ -170,10 +208,12 @@ const MovingGradient2Example: React.FC = () => {
           colorCategory={colorCategory}
           animateColors={animateColors}
           colorAnimationSpeed={colorAnimationSpeed}
+          isStatic={isStatic}
+          mouseInfluence={mouseInfluence}
         />
       )}
     </div>
   )
 }
 
-export { MovingGradient2Example }
+export { MovingGradientExample }

@@ -9,6 +9,9 @@ uniform float u_speed;
 uniform float u_noiseScale;
 uniform float u_flowIntensity;
 uniform float u_colorShift;
+uniform vec2 u_mouse;
+uniform float u_mouseInfluence;
+uniform bool u_isStatic;
 
 varying vec2 vUv;
 
@@ -66,28 +69,89 @@ vec3 getPaletteColor(float t, float variation) {
 
 void main() {
     vec2 st = vUv * u_noiseScale;
-    vec2 pos = st + u_time * u_speed * 0.1;
     
-    // Generate multiple layers of noise
-    float n1 = fbm(pos * 2.0 + u_time * u_speed * 0.05);
-    float n2 = fbm(pos * 1.5 + u_time * u_speed * 0.03 + 100.0);
-    float n3 = fbm(pos * 2.5 + u_time * u_speed * 0.07 + 200.0);
+    // Mouse influence calculations
+    vec2 mousePos = u_mouse;
+    float mouseDistance = distance(vUv, mousePos);
+    
+    // Create softer, more organic falloff for blob effect
+    float mouseEffect = 1.0 - smoothstep(0.0, 0.35, mouseDistance);
+    mouseEffect = smoothstep(0.0, 1.0, mouseEffect); // Smooth the edges
+    mouseEffect *= u_mouseInfluence;
+    
+    // Base position with conditional animation
+    vec2 pos = st;
+    if (!u_isStatic) {
+        pos += u_time * u_speed * 0.1;
+    }
+    
+    // Add mouse disruption to noise sampling positions (more organic)
+    vec2 mouseDisruption = vec2(
+        fbm(vUv * 4.0 + u_time * 0.1) * mouseEffect * 0.08,
+        fbm(vUv * 3.5 + u_time * 0.12 + 100.0) * mouseEffect * 0.08
+    );
+    
+    // Generate multiple layers of noise with mouse disruption
+    float n1 = fbm((pos + mouseDisruption) * 2.0 + u_time * u_speed * 0.05);
+    float n2 = fbm((pos + mouseDisruption * 0.5) * 1.5 + u_time * u_speed * 0.03 + 100.0);
+    float n3 = fbm((pos + mouseDisruption * 1.5) * 2.5 + u_time * u_speed * 0.07 + 200.0);
+    
+    // Mouse trail effect - creates organic blob-like effects
+    float trailEffect = 0.0;
+    if (mouseEffect > 0.0) {
+        // Create organic blob shape around mouse
+        vec2 blobOffset = vec2(
+            sin(u_time * 0.8) * 0.02,
+            cos(u_time * 1.1) * 0.02
+        );
+        vec2 blobCenter = mousePos + blobOffset;
+        float blobDistance = distance(vUv, blobCenter);
+        
+        // Multi-layer noise for organic blob texture
+        float blobNoise1 = fbm((vUv - mousePos) * 12.0 + u_time * 0.3);
+        float blobNoise2 = fbm((vUv - mousePos) * 6.0 + u_time * 0.2);
+        
+        // Create smooth blob with organic edges
+        float blobShape = 1.0 - smoothstep(0.0, 0.25, blobDistance);
+        blobShape *= (0.7 + blobNoise1 * 0.3);
+        blobShape = smoothstep(0.0, 1.0, blobShape);
+        
+        // Combine blob effect with trail noise
+        float trailNoise = fbm(vUv * 8.0 + u_time * 0.5);
+        trailEffect = mouseEffect * trailNoise * 0.3;
+        trailEffect += blobShape * mouseEffect * 0.4;
+        
+        // Add subtle breathing effect to the blob
+        float breathe = sin(u_time * 2.0) * 0.1 + 1.0;
+        trailEffect *= breathe;
+    }
     
     // Create gradient based on UV coordinates
     float gradientX = vUv.x;
     float gradientY = vUv.y;
     
     // Combine gradient with noise for color selection
-    float colorMix = gradientX + n1 * 0.3;
-    colorMix += sin(u_time * u_speed * 0.02 + vUv.x * 6.28) * 0.1;
-    colorMix += cos(u_time * u_speed * 0.015 + vUv.y * 6.28) * 0.1;
+    float colorMix = gradientX + n1 * 0.3 + trailEffect;
     
-    // Add temporal color shifts
-    colorMix += sin(u_time * u_speed * 0.008) * u_colorShift;
+    // Conditional temporal effects
+    if (!u_isStatic) {
+        colorMix += sin(u_time * u_speed * 0.02 + vUv.x * 6.28) * 0.1;
+        colorMix += cos(u_time * u_speed * 0.015 + vUv.y * 6.28) * 0.1;
+        colorMix += sin(u_time * u_speed * 0.008) * u_colorShift;
+    } else {
+        // Static mode: use mouse position for color shifts
+        colorMix += mouseEffect * 0.2;
+    }
     
     // Use noise for brightness variation
     float brightness = 0.6 + n3 * 0.4 + gradientY * 0.3;
-    brightness += sin(u_time * u_speed * 0.01) * 0.1;
+    
+    // Mouse brightening effect
+    brightness += mouseEffect * 0.4;
+    
+    if (!u_isStatic) {
+        brightness += sin(u_time * u_speed * 0.01) * 0.1;
+    }
     brightness = clamp(brightness, 0.2, 1.0);
     
     // Get color from palette
@@ -96,14 +160,26 @@ void main() {
     // Apply brightness
     color *= brightness;
     
-    // Add some subtle flowing effects
-    vec2 flowPos = vUv + vec2(
-        sin(u_time * u_speed * 0.03 + vUv.y * 3.14), 
-        cos(u_time * u_speed * 0.025 + vUv.x * 3.14)
-    ) * u_flowIntensity;
+    // Flowing effects - conditional on static mode
+    vec2 flowPos = vUv;
+    if (!u_isStatic) {
+        flowPos += vec2(
+            sin(u_time * u_speed * 0.03 + vUv.y * 3.14), 
+            cos(u_time * u_speed * 0.025 + vUv.x * 3.14)
+        ) * u_flowIntensity;
+    } else {
+        // In static mode, flow is driven by mouse
+        flowPos += mouseDisruption * 2.0;
+    }
     
     float flow = fbm(flowPos * 4.0 + u_time * u_speed * 0.02);
     color += flow * 0.1;
+    
+    // Mouse trail color enhancement
+    if (mouseEffect > 0.0) {
+        vec3 trailColor = getPaletteColor(colorMix + 0.3, trailEffect);
+        color = mix(color, trailColor, mouseEffect * 0.4);
+    }
     
     // Additional noise-based color variation
     float colorVariation = n2 * 0.15;
