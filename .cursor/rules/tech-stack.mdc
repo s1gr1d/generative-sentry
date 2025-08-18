@@ -16,7 +16,11 @@ alwaysApply: true
 ## Code Organization
 ```
 src/
-├── components/     # Reusable UI components
+├─├─ components/     # Reusable UI components
+| ├─ Button/
+| ├─── index.ts
+| ├─── Button.tsx
+| └─── Button.module.css
 ├── scenes/        # 3D scenes and environments  
 ├── algorithms/    # Generative art algorithms
 ├── shaders/       # GLSL shader files
