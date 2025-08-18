@@ -46,6 +46,7 @@ src/
 - Comment complex algorithms and mathematical formulas
 - Use descriptive variable names for mathematical operations
 - Prefer composition over inheritance for art generators
+- Prefer named exports over default exports
 
 ## CSS Rules
 - Only use modern, native CSS features like CSS Nesting
