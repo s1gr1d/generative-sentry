@@ -93,27 +93,29 @@ export const smoothstep = (edge0: number, edge1: number, x: number): number => {
 }
 ```
 
-## Color Utilities
+## Color Usage (RESTRICTED)
+**CRITICAL**: Only use approved colors from the official palette:
+
 ```tsx
-// utils/colorUtils.ts
-export const hexToRgb = (hex: string): [number, number, number] => {
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-  return result ? [
-    parseInt(result[1], 16),
-    parseInt(result[2], 16),
-    parseInt(result[3], 16)
-  ] : [0, 0, 0]
+import { 
+  COLOR_PALETTE, 
+  getRandomColor, 
+  getRandomColors,
+  hexToThreeColor 
+} from '@/utils/colorPalette'
+
+// Algorithm color selection
+export const selectAlgorithmColors = (count: number) => {
+  return getRandomColors(count, 'PRIMARY')
 }
 
-export const lerpColor = (color1: string, color2: string, t: number): string => {
-  const [r1, g1, b1] = hexToRgb(color1)
-  const [r2, g2, b2] = hexToRgb(color2)
-  
-  const r = Math.round(lerp(r1, r2, t))
-  const g = Math.round(lerp(g1, g2, t))
-  const b = Math.round(lerp(b1, b2, t))
-  
-  return `rgb(${r}, ${g}, ${b})`
+export const getThemeColors = (theme: 'warm' | 'cool' | 'purples') => {
+  switch (theme) {
+    case 'warm': return getRandomColors(3, 'WARM')
+    case 'cool': return getRandomColors(3, 'COOL')  
+    case 'purples': return getRandomColors(3, 'PURPLES')
+    default: return getRandomColors(3, 'ALL')
+  }
 }
 ```
 

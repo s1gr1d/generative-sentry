@@ -1,0 +1,150 @@
+---
+description: Official color palette restrictions and usage guidelines
+globs: ["**/*.tsx", "**/*.ts", "**/*.css", "**/*.scss", "**/*.jsx", "**/*.js"]
+alwaysApply: true
+---
+
+# Color Palette Restrictions
+
+## MANDATORY: Use Only Approved Colors
+
+**CRITICAL**: Only use colors from the official color palette defined in `src/utils/colorPalette.ts`. 
+NO other colors are allowed in this project.
+
+## Import the Palette
+
+Always import colors from the official palette:
+
+```tsx
+import { COLOR_PALETTE, PRIMARY_COLORS, SECONDARY_COLORS, TERTIARY_COLORS } from '@/utils/colorPalette'
+
+// Use named constants, never hardcoded hex values
+const color = COLOR_PALETTE.BLURPLE
+const material = new THREE.MeshStandardMaterial({ 
+  color: PRIMARY_COLORS.DK_VIOLET 
+})
+```
+
+## Approved Color Categories
+
+### Primary Colors (Brand Colors)
+- `DK_VIOLET` (#36166b) - Dark violet
+- `LT_VIOLET` (#6e47ae) - Light violet  
+- `DK_PURPLE` (#4d0a55) - Dark purple
+- `LT_PURPLE` (#a737b4) - Light purple
+- `DK_BLURPLE` (#4e2a9a) - Dark blurple
+- `BLURPLE` (#7553ff) - Main blurple
+- `LT_BLURPLE` (#9e86ff) - Light blurple
+- `RICH_BLACK` (#181225) - Rich black
+
+### Secondary Colors (Accents)
+- `DK_PINK` (#ff45a8) - Dark pink
+- `LT_PINK` (#ff70bc) - Light pink
+- `DK_ORANGE` (#ee8019) - Dark orange
+- `LT_ORANGE` (#ff9838) - Light orange  
+- `DK_YELLOW` (#fdb81b) - Dark yellow
+- `LT_YELLOW` (#ffd00e) - Light yellow
+
+### Tertiary Colors (Supporting)
+- `DK_GREEN` (#92dd00) - Dark green
+- `LT_GREEN` (#c0ed49) - Light green
+- `DK_BLUE` (#226dfc) - Dark blue
+- `LT_BLUE` (#3edcff) - Light blue
+- `BACKGROUND_GREY` (#f6f6f8) - Background grey
+
+## Three.js Color Usage
+
+For Three.js materials, use the normalized RGB values:
+
+```tsx
+import { NORMALIZED_RGB, hexToThreeColor } from '@/utils/colorPalette'
+
+// Method 1: Use pre-normalized values
+const color = new THREE.Color(...NORMALIZED_RGB.BLURPLE)
+
+// Method 2: Convert hex to Three.js color
+const color = new THREE.Color(...hexToThreeColor(COLOR_PALETTE.DK_VIOLET))
+
+// Method 3: Direct Three.js hex
+const color = new THREE.Color(COLOR_PALETTE.LT_PINK)
+```
+
+## P5.js Color Usage
+
+```tsx
+import { COLOR_PALETTE, RGB_VALUES } from '@/utils/colorPalette'
+
+// Method 1: Use hex directly
+p.fill(COLOR_PALETTE.BLURPLE)
+
+// Method 2: Use RGB values
+const [r, g, b] = RGB_VALUES.DK_PURPLE
+p.fill(r, g, b)
+```
+
+## Random Color Selection
+
+Use the provided utility functions for random colors:
+
+```tsx
+import { getRandomColor, getRandomColors, COLOR_CATEGORIES } from '@/utils/colorPalette'
+
+// Get a random color from any category
+const randomColor = getRandomColor()
+
+// Get random color from specific category
+const warmColor = getRandomColor('WARM')
+const purpleColor = getRandomColor('PURPLES')
+
+// Get multiple unique random colors
+const palette = getRandomColors(5, 'PRIMARY')
+```
+
+## CSS/Styling
+
+Use CSS custom properties for the palette:
+
+```css
+:root {
+  --color-blurple: #7553ff;
+  --color-dk-violet: #36166b;
+  --color-rich-black: #181225;
+  /* Define all colors as CSS variables */
+}
+
+.component {
+  background-color: var(--color-blurple);
+  color: var(--color-rich-black);
+}
+```
+
+## FORBIDDEN Practices
+
+❌ **NEVER** use hardcoded colors:
+```tsx
+// DON'T DO THIS
+const color = '#ff0000'  // Random red - NOT ALLOWED
+const bgColor = 'blue'   // Generic blue - NOT ALLOWED
+```
+
+❌ **NEVER** use CSS color names:
+```tsx
+// DON'T DO THIS  
+color: 'red'
+background: 'blue'
+fill: 'green'
+```
+
+❌ **NEVER** use rgb() or hsl() with custom values:
+```tsx
+// DON'T DO THIS
+color: rgb(255, 0, 0)
+background: hsl(240, 100%, 50%)
+```
+
+## Required Practices
+
+✅ **ALWAYS** import from the color palette
+✅ **ALWAYS** use the named constants
+✅ **ALWAYS** use the utility functions for Three.js integration
+✅ **ALWAYS** validate colors are from the approved palette

@@ -8,6 +8,7 @@ This directory contains modern Cursor rules written in MDC format following the
 ### Always Applied
 
 - **tech-stack.mdc** - Core technology stack and coding standards (always active)
+- **color-restrictions.mdc** - Official color palette restrictions (always active)
 
 ### Auto Attached (by file patterns)
 

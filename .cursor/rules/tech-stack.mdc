@@ -41,3 +41,8 @@ src/
 - Comment complex algorithms and mathematical formulas
 - Use descriptive variable names for mathematical operations
 - Prefer composition over inheritance for art generators
+
+## Color Usage
+- **MANDATORY**: Only use colors from `src/utils/colorPalette.ts`
+- Import colors using named constants, never hardcode hex values
+- Use provided utility functions for Three.js and p5.js integration
