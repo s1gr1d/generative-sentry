@@ -3,6 +3,8 @@ import { gradientWavesSection } from './GradientWavesSection'
 import { movingGradientsSection } from './MovingGradientsSection'
 import { complexGradientsSection } from './ComplexGradientsSection'
 import { interactiveGradientsSection } from './InteractiveGradientsSection'
+import { floatingCubesSection } from './FloatingCubesSection'
+import { artisticCubesSection } from './ArtisticCubesSection'
 
 // Registry of all available sections
 const sectionRegistry: SectionDefinition[] = [
@@ -10,6 +12,8 @@ const sectionRegistry: SectionDefinition[] = [
   movingGradientsSection,
   complexGradientsSection,
   interactiveGradientsSection,
+  floatingCubesSection,
+  artisticCubesSection,
 ]
 
 // Sort sections by order

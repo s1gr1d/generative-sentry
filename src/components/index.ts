@@ -1,3 +1,5 @@
 export { ErrorBoundary } from './ErrorBoundary'
 export { Layout, Section } from './Layout'
 export { MovingGradientCanvas } from './MovingGradient/MovingGradientCanvas'
+export { FloatingCubesCanvas, FloatingCubes } from './FloatingCubes'
+export { ArtisticCubesCanvas, ArtisticCubes } from './ArtisticCubes'
