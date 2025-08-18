@@ -107,6 +107,34 @@ export const getRandomColors = (count: number, category: keyof typeof COLOR_CATE
   return result
 }
 
+export const getRandomColorNames = (count: number, category: keyof typeof COLOR_CATEGORIES = 'ALL'): (keyof typeof COLOR_PALETTE)[] => {
+  const colors = [...COLOR_CATEGORIES[category]]
+  const result: (keyof typeof COLOR_PALETTE)[] = []
+  
+  // Convert hex colors to color names first
+  const colorNames = colors.map(hexColor => {
+    return Object.keys(COLOR_PALETTE).find(
+      key => COLOR_PALETTE[key as keyof typeof COLOR_PALETTE] === hexColor
+    ) as keyof typeof COLOR_PALETTE
+  }).filter(Boolean)
+  
+  // If we need more colors than available, cycle through them
+  for (let i = 0; i < count; i++) {
+    if (colorNames.length === 0) break
+    
+    const colorIndex = i % colorNames.length
+    result.push(colorNames[colorIndex])
+  }
+  
+  // Shuffle the result to add some randomness
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]]
+  }
+  
+  return result
+}
+
 export const hexToThreeColor = (hex: string): [number, number, number] => {
   const colorKey = Object.keys(COLOR_PALETTE).find(
     key => COLOR_PALETTE[key as keyof typeof COLOR_PALETTE] === hex
