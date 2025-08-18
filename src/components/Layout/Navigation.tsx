@@ -1,58 +1,61 @@
 import { useState, useEffect } from 'react'
-import { COLOR_PALETTE } from '@/utils/colorPalette'
+import { sections } from '@/sections'
 import styles from './Navigation.module.css'
 
-interface NavigationItem {
-  id: string
-  title: string
-  description: string
-}
-
-const navigationItems: NavigationItem[] = [
-  {
-    id: 'gradient-waves',
-    title: 'Gradient Waves',
-    description: 'Flowing animated gradients'
-  },
-  {
-    id: 'moving-gradients',
-    title: 'Moving Gradients', 
-    description: 'Dynamic color transitions'
-  },
-  {
-    id: 'complex-gradients',
-    title: 'Complex Gradients',
-    description: 'Multi-layered color effects'
-  }
-]
-
 export function Navigation() {
-  const [activeSection, setActiveSection] = useState(navigationItems[0].id)
+  const [activeSection, setActiveSection] = useState(sections[0]?.id || '')
 
   useEffect(() => {
+    // Set initial section from URL hash
+    const hash = window.location.hash.slice(1)
+    if (hash && sections.find(s => s.id === hash)) {
+      setActiveSection(hash)
+    }
+
     const handleScroll = () => {
-      const sections = document.querySelectorAll('[data-section]')
+      const sectionElements = document.querySelectorAll('[data-section]')
       const scrollPosition = window.scrollY + window.innerHeight / 2
 
-      sections.forEach((section) => {
+      sectionElements.forEach((section) => {
         const element = section as HTMLElement
         const top = element.offsetTop
         const bottom = top + element.offsetHeight
 
         if (scrollPosition >= top && scrollPosition <= bottom) {
-          setActiveSection(element.dataset.section || '')
+          const sectionId = element.dataset.section || ''
+          if (sectionId !== activeSection) {
+            setActiveSection(sectionId)
+            // Update URL hash without triggering scroll
+            window.history.replaceState(null, '', `#${sectionId}`)
+          }
         }
       })
     }
 
+    const handleHashChange = () => {
+      const hash = window.location.hash.slice(1)
+      if (hash && sections.find(s => s.id === hash)) {
+        setActiveSection(hash)
+        // Scroll to section if hash changes from URL navigation
+        scrollToSection(hash)
+      }
+    }
+
     window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+    window.addEventListener('hashchange', handleHashChange)
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('hashchange', handleHashChange)
+    }
+  }, [activeSection])
 
   const scrollToSection = (sectionId: string) => {
     const section = document.querySelector(`[data-section="${sectionId}"]`)
     if (section) {
       section.scrollIntoView({ behavior: 'smooth' })
+      // Update URL hash
+      window.history.pushState(null, '', `#${sectionId}`)
     }
   }
 
@@ -64,17 +67,17 @@ export function Navigation() {
       </div>
 
       <ul className={styles.menu}>
-        {navigationItems.map((item, index) => (
-          <li key={item.id} className={styles.menuItem}>
+        {sections.map((section) => (
+          <li key={section.id} className={styles.menuItem}>
             <button
               className={`${styles.menuButton} ${
-                activeSection === item.id ? styles.active : ''
+                activeSection === section.id ? styles.active : ''
               }`}
-              onClick={() => scrollToSection(item.id)}
+              onClick={() => scrollToSection(section.id)}
             >
               <div className={styles.menuContent}>
-                <span className={styles.menuTitle}>{item.title}</span>
-                <span className={styles.menuDescription}>{item.description}</span>
+                <span className={styles.menuTitle}>{section.title}</span>
+                <span className={styles.menuDescription}>{section.description}</span>
               </div>
             </button>
           </li>
