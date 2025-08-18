@@ -15,6 +15,7 @@ export function Navigation() {
   const [activeSection, setActiveSection] = useState(getInitialSection)
   const activeSectionRef = useRef(activeSection)
   const isInitialNavigationRef = useRef(false)
+  const buttonRefsRef = useRef<Map<string, HTMLButtonElement>>(new Map())
 
   // Update ref whenever state changes
   const updateActiveSection = (sectionId: string) => {
@@ -28,6 +29,14 @@ export function Navigation() {
                            document.querySelector('[class*="main"]') as HTMLElement
     
     if (section && scrollContainer) {
+      // Immediately update active section for instant UI feedback (no focus needed since button click already focuses)
+      if (updateHash) {
+        updateActiveSection(sectionId)
+        if (import.meta.env.DEV) {
+          console.log(`🎯 Immediately updating active section to: ${sectionId}`)
+        }
+      }
+      
       // Set flag to prevent scroll detection during navigation
       if (updateHash) {
         isInitialNavigationRef.current = true
@@ -239,10 +248,18 @@ export function Navigation() {
         {sections.map((section) => (
           <li key={section.id} className={styles.menuItem}>
             <button
+              ref={(el) => {
+                if (el) {
+                  buttonRefsRef.current.set(section.id, el)
+                } else {
+                  buttonRefsRef.current.delete(section.id)
+                }
+              }}
               className={`${styles.menuButton} ${
                 activeSection === section.id ? styles.active : ''
               }`}
               onClick={() => scrollToSection(section.id)}
+              aria-current={activeSection === section.id ? 'true' : 'false'}
             >
               <div className={styles.menuContent}>
                 <span className={styles.menuTitle}>{section.title}</span>
