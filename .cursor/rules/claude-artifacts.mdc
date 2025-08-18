@@ -1,0 +1,97 @@
+---
+description: Guidelines for creating Claude Artifacts components
+globs: []
+alwaysApply: false
+---
+
+# Claude Artifacts Integration
+
+## Self-Contained Components
+Create components that work independently in Artifacts:
+
+```tsx
+import React, { useState, useEffect, useRef } from 'react'
+
+// Include all necessary imports at the top
+// Use inline styles or CSS-in-JS for styling
+// Make components responsive and accessible
+
+export default function GenerativeArtifact() {
+  // Component logic here
+  return (
+    <div style={{ 
+      width: '100%', 
+      height: '400px',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center'
+    }}>
+      {/* Artifact content */}
+    </div>
+  )
+}
+```
+
+## Required Patterns
+- **All imports included**: No external dependencies beyond standard libraries
+- **Inline styling**: Use style objects or CSS-in-JS, no external stylesheets
+- **Responsive design**: Components adapt to different screen sizes
+- **Interactive controls**: Include sliders, buttons for parameter adjustment
+- **Error boundaries**: Handle errors gracefully
+
+## Styling Approach
+```tsx
+const styles = {
+  container: {
+    width: '100%',
+    maxWidth: '800px',
+    margin: '0 auto',
+    padding: '20px',
+    fontFamily: 'system-ui, sans-serif'
+  },
+  canvas: {
+    border: '1px solid #ccc',
+    borderRadius: '8px',
+    display: 'block'
+  },
+  controls: {
+    display: 'flex',
+    gap: '10px',
+    marginTop: '15px',
+    flexWrap: 'wrap'
+  }
+}
+```
+
+## Interactive Elements
+Always include parameter controls for exploration:
+
+```tsx
+<div style={styles.controls}>
+  <label>
+    Complexity: 
+    <input 
+      type="range" 
+      min="1" 
+      max="10" 
+      value={complexity}
+      onChange={(e) => setComplexity(parseInt(e.target.value))}
+    />
+  </label>
+  <button onClick={regenerate}>Regenerate</button>
+  <button onClick={downloadArt}>Download</button>
+</div>
+```
+
+## Performance for Artifacts
+- Keep initial load fast
+- Use reasonable default parameters
+- Implement smooth animations
+- Provide loading states for complex generations
+- Include performance warnings for heavy computations
+
+## Accessibility
+- Include proper ARIA labels
+- Support keyboard navigation
+- Provide alt text for generated visuals
+- Use semantic HTML elements

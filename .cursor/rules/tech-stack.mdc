@@ -1,0 +1,43 @@
+---
+description: Core technology stack and coding standards for generative art project
+globs: ["**/*.tsx", "**/*.ts", "**/*.jsx", "**/*.js"]
+alwaysApply: true
+---
+
+# Generative Art Tech Stack
+
+## Core Technologies
+- **React 19+** with TypeScript and functional components only
+- **Three.js r179+** with **@react-three/fiber** for 3D graphics
+- **Vite** for build tooling with fast HMR
+- **ESLint + Prettier** for consistent code formatting
+
+## Code Organization
+```
+src/
+├── components/     # Reusable UI components
+├── scenes/        # 3D scenes and environments  
+├── algorithms/    # Generative art algorithms
+├── shaders/       # GLSL shader files
+├── utils/         # Helper functions and utilities
+└── types/         # TypeScript type definitions
+```
+
+## TypeScript Standards
+- Use strict TypeScript configuration
+- Define proper types for 3D vectors, colors, and mathematical concepts
+- Prefer `interface` over `type` for object shapes
+- Use descriptive names for mathematical concepts and algorithms
+
+## React Patterns
+- Functional components with hooks only
+- Use `useMemo` for expensive calculations
+- Implement proper cleanup in `useEffect`
+- Use `Suspense` for loading states
+- Create error boundaries for 3D components
+
+## Code Style
+- Extract magic numbers into named constants
+- Comment complex algorithms and mathematical formulas
+- Use descriptive variable names for mathematical operations
+- Prefer composition over inheritance for art generators

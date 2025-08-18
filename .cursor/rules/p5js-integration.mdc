@@ -1,0 +1,76 @@
+---
+description: P5.js integration patterns with React for 2D generative art
+globs: ["**/*p5*", "**/*sketch*", "**/*canvas*", "**/algorithms/**"]
+alwaysApply: false
+---
+
+# P5.js Integration with React
+
+## Instance Mode Setup
+Always use p5.js in instance mode, never global mode:
+
+```tsx
+import p5 from 'p5'
+import { useEffect, useRef } from 'react'
+
+function P5Sketch() {
+  const sketchRef = useRef<HTMLDivElement>(null)
+  const p5Instance = useRef<p5>()
+
+  useEffect(() => {
+    if (!sketchRef.current) return
+
+    const sketch = (p: p5) => {
+      p.setup = () => {
+        p.createCanvas(800, 600)
+      }
+
+      p.draw = () => {
+        p.background(220)
+        // Your generative art here
+      }
+    }
+
+    p5Instance.current = new p5(sketch, sketchRef.current)
+
+    return () => {
+      p5Instance.current?.remove()
+    }
+  }, [])
+
+  return <div ref={sketchRef} />
+}
+```
+
+## TypeScript Integration
+- Install `@types/p5` for TypeScript support
+- Type your sketch functions properly
+- Use proper types for p5 vectors, colors, and graphics
+
+## Responsive Design
+```tsx
+// Make sketches responsive
+p.setup = () => {
+  const canvas = p.createCanvas(
+    p.windowWidth * 0.8,
+    p.windowHeight * 0.6
+  )
+  canvas.parent(containerRef.current!)
+}
+
+p.windowResized = () => {
+  p.resizeCanvas(p.windowWidth * 0.8, p.windowHeight * 0.6)
+}
+```
+
+## Performance Tips
+- Use `p.noLoop()` for static art, `p.redraw()` for updates
+- Implement efficient drawing patterns
+- Consider using offscreen graphics for complex compositions
+- Cache expensive calculations outside the draw loop
+
+## Common Patterns
+- Separate algorithm logic from rendering
+- Use seed values for reproducible randomness: `p.randomSeed(seed)`
+- Implement parameter controls for real-time tweaking
+- Export artwork: `p.save('artwork.png')`

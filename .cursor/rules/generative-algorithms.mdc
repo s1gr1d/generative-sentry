@@ -1,0 +1,136 @@
+---
+description: Patterns and best practices for generative art algorithms
+globs: ["**/algorithms/**", "**/*algorithm*", "**/*generator*", "**/utils/**"]
+alwaysApply: false
+---
+
+# Generative Art Algorithm Patterns
+
+## Algorithm Structure
+Separate algorithm logic from rendering for reusability:
+
+```tsx
+// algorithms/perlinNoise.ts
+export interface NoiseParams {
+  seed: number
+  octaves: number
+  frequency: number
+  amplitude: number
+}
+
+export class PerlinNoiseGenerator {
+  constructor(private params: NoiseParams) {}
+  
+  generate(x: number, y: number): number {
+    // Pure algorithm logic
+    return noiseValue
+  }
+  
+  updateParams(newParams: Partial<NoiseParams>): void {
+    this.params = { ...this.params, ...newParams }
+  }
+}
+```
+
+## Reproducible Randomness
+Always use seeded random for consistent results:
+
+```tsx
+// utils/seededRandom.ts
+export class SeededRandom {
+  constructor(private seed: number) {}
+  
+  next(): number {
+    this.seed = (this.seed * 9301 + 49297) % 233280
+    return this.seed / 233280
+  }
+  
+  range(min: number, max: number): number {
+    return min + this.next() * (max - min)
+  }
+}
+
+// Usage in algorithms
+const rng = new SeededRandom(userSeed)
+const randomValue = rng.range(0, 1)
+```
+
+## Parameter Management
+```tsx
+export interface ArtworkParams {
+  seed: number
+  complexity: number
+  colorPalette: string[]
+  animationSpeed: number
+}
+
+export const defaultParams: ArtworkParams = {
+  seed: 12345,
+  complexity: 5,
+  colorPalette: ['#ff6b6b', '#4ecdc4', '#45b7d1'],
+  animationSpeed: 1.0
+}
+```
+
+## Mathematical Utilities
+Create reusable math functions:
+
+```tsx
+// utils/mathUtils.ts
+export const lerp = (a: number, b: number, t: number): number => 
+  a + (b - a) * t
+
+export const map = (value: number, start1: number, stop1: number, start2: number, stop2: number): number =>
+  start2 + (stop2 - start2) * ((value - start1) / (stop1 - start1))
+
+export const noise2D = (x: number, y: number, seed: number): number => {
+  // Implement noise function
+}
+
+export const smoothstep = (edge0: number, edge1: number, x: number): number => {
+  const t = Math.max(0, Math.min(1, (x - edge0) / (edge1 - edge0)))
+  return t * t * (3 - 2 * t)
+}
+```
+
+## Color Utilities
+```tsx
+// utils/colorUtils.ts
+export const hexToRgb = (hex: string): [number, number, number] => {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+  return result ? [
+    parseInt(result[1], 16),
+    parseInt(result[2], 16),
+    parseInt(result[3], 16)
+  ] : [0, 0, 0]
+}
+
+export const lerpColor = (color1: string, color2: string, t: number): string => {
+  const [r1, g1, b1] = hexToRgb(color1)
+  const [r2, g2, b2] = hexToRgb(color2)
+  
+  const r = Math.round(lerp(r1, r2, t))
+  const g = Math.round(lerp(g1, g2, t))
+  const b = Math.round(lerp(b1, b2, t))
+  
+  return `rgb(${r}, ${g}, ${b})`
+}
+```
+
+## Export and Save Functionality
+```tsx
+export const downloadCanvas = (canvas: HTMLCanvasElement, filename: string = 'artwork.png'): void => {
+  const link = document.createElement('a')
+  link.download = filename
+  link.href = canvas.toDataURL()
+  link.click()
+}
+
+export const generateMetadata = (params: ArtworkParams) => ({
+  seed: params.seed,
+  timestamp: new Date().toISOString(),
+  parameters: params,
+  algorithm: 'PerlinNoise',
+  version: '1.0'
+})
+```

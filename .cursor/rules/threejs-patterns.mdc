@@ -1,0 +1,61 @@
+---
+description: Three.js and React-Three-Fiber best practices and patterns
+globs: ["**/scenes/**", "**/*3d*", "**/*three*", "**/*.glsl", "**/*.tsx", "**/*.ts", "**/*.jsx", "**/*.js"]
+alwaysApply: false
+---
+
+# Three.js & React-Three-Fiber Guidelines
+
+## Modern API Usage
+- Always use Three.js r179+ APIs
+- Prefer declarative JSX with @react-three/fiber over imperative Three.js code
+- Use `extend` from @react-three/fiber for custom Three.js objects
+- Stay updated with latest @react-three/fiber patterns
+
+## Animation Patterns
+```tsx
+// Prefer useFrame for animations
+import { useFrame } from '@react-three/fiber'
+
+function AnimatedMesh() {
+  const meshRef = useRef<THREE.Mesh>(null)
+  
+  useFrame((state, delta) => {
+    if (meshRef.current) {
+      meshRef.current.rotation.x += delta
+    }
+  })
+  
+  return <mesh ref={meshRef}>...</mesh>
+}
+```
+
+## Performance Optimization
+- Use `InstancedMesh` for repeated objects (>100 instances)
+- Implement proper disposal of geometries and materials
+- Use `LOD` (Level of Detail) for complex scenes
+- Profile with React DevTools and Three.js inspector
+
+## Memory Management
+```tsx
+useEffect(() => {
+  // Cleanup geometries and materials
+  return () => {
+    geometry.dispose()
+    material.dispose()
+    texture.dispose()
+  }
+}, [])
+```
+
+## Essential Imports
+```tsx
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { useRef, useMemo, useEffect } from 'react'
+import * as THREE from 'three'
+```
+
+## Error Handling
+- Handle WebGL context loss gracefully
+- Provide fallbacks for unsupported features
+- Validate WebGL capabilities before using advanced features

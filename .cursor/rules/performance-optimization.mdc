@@ -1,0 +1,68 @@
+---
+description: Performance optimization strategies for smooth 60fps generative art
+globs: []
+alwaysApply: false
+---
+
+# Performance Optimization for Generative Art
+
+## 60fps Target
+All generative art should maintain smooth 60fps performance:
+
+## React Optimization
+```tsx
+// Memoize expensive calculations
+const expensiveValue = useMemo(() => {
+  return heavyComputation(props.seed)
+}, [props.seed])
+
+// Debounce parameter changes
+const debouncedParams = useDebounce(params, 100)
+
+// Use callback refs for performance-critical updates
+const meshRef = useCallback((mesh: THREE.Mesh) => {
+  if (mesh) {
+    // Direct manipulation for performance
+    mesh.position.set(x, y, z)
+  }
+}, [x, y, z])
+```
+
+## Three.js Performance
+- **Instancing**: Use `InstancedMesh` for 100+ repeated objects
+- **Frustum Culling**: Let Three.js cull off-screen objects automatically
+- **Level of Detail**: Implement LOD for complex scenes
+- **Texture Optimization**: Use appropriate texture sizes and formats
+- **Geometry Merging**: Combine static geometries into single objects
+
+## WebGL Best Practices
+```tsx
+// Efficient material usage
+const sharedMaterial = useMemo(() => 
+  new THREE.MeshStandardMaterial({ color: 0xff0000 }), []
+)
+
+// Geometry instancing
+const geometry = useMemo(() => new THREE.BoxGeometry(1, 1, 1), [])
+
+// Efficient texture loading
+const texture = useLoader(THREE.TextureLoader, '/texture.jpg')
+```
+
+## Profiling Tools
+- React DevTools Profiler for component performance
+- Chrome DevTools for frame rate analysis
+- Three.js Inspector browser extension
+- WebGL Insight for GPU performance
+
+## Memory Management
+- Dispose of geometries, materials, and textures properly
+- Use object pooling for frequently created/destroyed objects
+- Monitor memory usage in DevTools
+- Implement cleanup in useEffect hooks
+
+## Animation Strategies
+- Use `requestAnimationFrame` through `useFrame`
+- Batch DOM updates
+- Prefer CSS transforms for UI animations
+- Use Web Workers for heavy computations
