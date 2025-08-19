@@ -1,1 +1,1 @@
-export { GradientExample } from './GradientExample'
+export { GradientExample } from "./GradientExample";

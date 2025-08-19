@@ -1,1 +1,1 @@
-export { default } from './SentryDataDemo';
+export { default } from "./SentryDataDemo";

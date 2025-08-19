@@ -1,10 +1,11 @@
-export { ErrorBoundary } from './ErrorBoundary'
-export { Layout, Section } from './Layout'
-export { MovingGradientCanvas } from './MovingGradient/MovingGradientCanvas'
-export { FloatingCubesCanvas, FloatingCubes } from './FloatingCubes'
-export { ArtisticCubesCanvas, ArtisticCubes } from './ArtisticCubes'
-export { AlphabetSoupCanvas, AlphabetSoup } from './AlphabetSoup'
-export { SentryLogo, SentryLogoCanvas } from './SentryLogo'
-export { default as SentryDataDemo } from './SentryDataDemo'
-export { default as SpanVisualization, SpanVisualizationCanvas } from './SpanVisualization'
-export { default as SpanAnalyticsStats } from './SpanAnalyticsStats'
+export { ErrorBoundary } from "./ErrorBoundary";
+export { Layout, Section } from "./Layout";
+export { MovingGradientCanvas } from "./MovingGradient/MovingGradientCanvas";
+export { FloatingCubesCanvas, FloatingCubes } from "./FloatingCubes";
+export { ArtisticCubesCanvas, ArtisticCubes } from "./ArtisticCubes";
+export { AlphabetSoupCanvas, AlphabetSoup } from "./AlphabetSoup";
+export { SentryLogoCanvas } from "./SentryLogo";
+export { default as SentryDataDemo } from "./SentryDataDemo";
+export { default as SpanVisualization, SpanVisualizationCanvas } from "./SpanVisualization";
+export { default as SpanAnalyticsStats } from "./SpanAnalyticsStats";
+export { SpanDataGradients } from "./SpanDataGradients";

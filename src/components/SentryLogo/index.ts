@@ -1,1 +1,1 @@
-export { SentryLogoCanvas } from './SentryLogoCanvas'
+export { SentryLogoCanvas } from "./SentryLogoCanvas";
