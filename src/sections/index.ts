@@ -7,6 +7,7 @@ import { floatingCubesSection } from './FloatingCubesSection'
 import { artisticCubesSection } from './ArtisticCubesSection'
 import { alphabetSoupSection } from './AlphabetSoupSection'
 import { sentryDataSection } from './SentryDataSection'
+import { spanVisualizationSection } from './SpanVisualizationSection'
 
 // Registry of all available sections
 const sectionRegistry: SectionDefinition[] = [
@@ -18,6 +19,7 @@ const sectionRegistry: SectionDefinition[] = [
   artisticCubesSection,
   alphabetSoupSection,
   sentryDataSection,
+  spanVisualizationSection,
 ]
 
 // Sort sections by order

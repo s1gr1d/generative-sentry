@@ -1,6 +1,6 @@
-# Sentry Error Data for Generative Art
+# Sentry Data for Generative Art
 
-This directory contains comprehensive dummy data representing Sentry error envelopes, designed for use in generative art projects that visualize error patterns and metrics.
+This directory contains comprehensive dummy data representing both Sentry error envelopes and performance span data, designed for use in generative art projects that visualize error patterns, performance metrics, and distributed tracing.
 
 ## Data Structure
 
@@ -236,3 +236,315 @@ const customErrors = generateSentryEnvelopes(50);
 // Generate 20 network errors only
 const networkErrors = generateSentryEnvelopesForType('network', 20);
 ```
+
+---
+
+# Performance Span Data for Tracing Visualization
+
+In addition to error data, this project includes comprehensive span data for visualizing distributed tracing and performance patterns.
+
+## Span Data Structure
+
+Span data represents operations in distributed systems with timing information:
+
+```typescript
+interface SpanData {
+  span_id: string;           // Unique span identifier
+  trace_id: string;          // Trace this span belongs to
+  parent_span_id?: string;   // Parent span (for hierarchical traces)
+  description: string;       // Human-readable operation description
+  op: string;               // Operation type (e.g., 'http.server', 'db.query')
+  duration: number;         // Duration in milliseconds
+  start_timestamp: number;  // When the operation started
+  end_timestamp: number;    // When the operation ended
+  project: {
+    name: string;           // Project name (e.g., 'Sentry Dashboard')
+    id: string;            // Project identifier
+  };
+  tags?: Record<string, string>;  // Additional metadata
+  status: string;               // Operation status ('ok', 'error', etc.)
+}
+```
+
+## Available Span Datasets
+
+### Core Span Collections
+
+```typescript
+import {
+  SAMPLE_SPANS,        // All spans from generated traces
+  SAMPLE_TRACES,       // Complete traces with hierarchical spans
+  SPAN_STATISTICS,     // Aggregated metrics and statistics
+  POPULAR_DATASETS     // Most commonly used datasets
+} from '@/data/sampleSpanData';
+```
+
+### Operation-Specific Datasets
+
+```typescript
+// HTTP Operations (great for network visualizations)
+import {
+  HTTP_SERVER_SPANS,   // 'GET /homepage', 'POST /api/login', etc.
+  HTTP_CLIENT_SPANS,   // API calls, external requests
+  ALL_HTTP_SPANS       // Combined HTTP operations
+} from '@/data/sampleSpanData';
+
+// UI Operations (perfect for frontend performance art)
+import {
+  UI_PAINT_SPANS,      // 'Paint Dashboard', 'Render Chart Component'
+  UI_MOUNT_SPANS,      // 'Mount Dashboard Component', 'Mount User Profile'
+  UI_RENDER_SPANS,     // 'Render App Component', 'Render Error Details'
+  ALL_UI_SPANS         // Combined UI operations
+} from '@/data/sampleSpanData';
+
+// Database Operations
+import {
+  DB_QUERY_SPANS,      // 'SELECT users WHERE active = true'
+  ALL_DB_SPANS         // All database operations
+} from '@/data/sampleSpanData';
+```
+
+### Performance-Based Datasets
+
+```typescript
+// Duration-based groupings for performance visualization
+import {
+  FAST_SPANS,         // < 20ms (UI interactions, cache hits)
+  MEDIUM_SPANS,       // 20-100ms (API calls, rendering)
+  SLOW_SPANS,         // 100-500ms (database queries)
+  VERY_SLOW_SPANS     // > 500ms (file uploads, heavy processing)
+} from '@/data/sampleSpanData';
+```
+
+### Common Pattern Datasets
+
+```typescript
+// Spans grouped by common user flows
+import {
+  HOMEPAGE_SPANS,     // All spans related to homepage loading
+  LOGIN_SPANS,        // Complete login flow spans
+  DASHBOARD_SPANS,    // Dashboard rendering and data loading
+  API_SPANS          // All API-related operations
+} from '@/data/sampleSpanData';
+```
+
+## Span Operations
+
+The generator includes 27 different operation types optimized for art visualization:
+
+### High-Frequency Operations (great for pattern density)
+- `http.server` - Server-side HTTP requests
+- `http.client` - Client-side HTTP requests  
+- `ui.paint` - UI painting operations
+- `ui.mount` - Component mounting
+- `db.query` - Database queries
+
+### Medium-Frequency Operations
+- `ui.render` - Component rendering
+- `navigation.navigate` - Page navigation
+- `function.call` - Function executions
+- `cache.get` - Cache retrievals
+
+### Specialized Operations
+- `auth.verify` - Authentication checks
+- `file.upload` - File uploads (long duration)
+- `process.video` - Video processing (very long duration)
+
+## Span Data for Generative Art
+
+### 1. Performance Waterfall Visualization
+
+```typescript
+import { SAMPLE_TRACES } from '@/data/sampleSpanData';
+import { COLOR_PALETTE } from '@/utils/colorPalette';
+
+// Create waterfall chart showing span hierarchies
+const createWaterfallVisualization = (trace: TraceData) => {
+  return trace.spans.map((span, index) => ({
+    x: span.start_timestamp - trace.start_timestamp,
+    y: index * 20,
+    width: span.duration,
+    height: 15,
+    color: getOperationColor(span.op),
+    description: span.description
+  }));
+};
+```
+
+### 2. Operation Type Clustering
+
+```typescript
+import { SPANS_BY_OPERATION } from '@/data/sampleSpanData';
+
+// Group spans by operation for clustered visualizations
+const operationClusters = Object.entries(SPANS_BY_OPERATION).map(([op, spans]) => ({
+  operation: op,
+  count: spans.length,
+  avgDuration: spans.reduce((sum, span) => sum + span.duration, 0) / spans.length,
+  color: getOperationColor(op),
+  spans: spans
+}));
+```
+
+### 3. Duration-Based Particle Systems
+
+```typescript
+import { SAMPLE_SPANS } from '@/data/sampleSpanData';
+
+// Create particles with size based on duration
+const createDurationParticles = () => {
+  return SAMPLE_SPANS.map(span => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    size: Math.log(span.duration + 1) * 5, // Logarithmic scaling
+    color: getDurationColor(span.duration),
+    velocity: 100 / span.duration, // Slower particles for longer operations
+    operation: span.op
+  }));
+};
+```
+
+### 4. Project-Based Network Graphs
+
+```typescript
+import { FRONTEND_SPANS, BACKEND_SPANS } from '@/data/sampleSpanData';
+
+// Create network graph showing project interactions
+const projectNetwork = {
+  nodes: [
+    { id: 'frontend', spans: FRONTEND_SPANS, color: COLOR_PALETTE.LT_BLUE },
+    { id: 'backend', spans: BACKEND_SPANS, color: COLOR_PALETTE.DK_VIOLET }
+  ],
+  edges: findSpanConnections(FRONTEND_SPANS, BACKEND_SPANS)
+};
+```
+
+### 5. Temporal Flow Visualization
+
+```typescript
+import { RECENT_SPANS } from '@/data/sampleSpanData';
+
+// Create flowing visualization based on span timing
+const createTemporalFlow = () => {
+  const sortedSpans = RECENT_SPANS.sort((a, b) => a.start_timestamp - b.start_timestamp);
+  
+  return sortedSpans.map((span, index) => ({
+    position: index / sortedSpans.length,
+    flow: span.duration / 1000, // Flow speed based on duration
+    color: getOperationColor(span.op),
+    size: Math.sqrt(span.duration),
+    description: span.description
+  }));
+};
+```
+
+## Operation Color Mapping
+
+Use consistent colors for operation types:
+
+```typescript
+import { COLOR_PALETTE, PRIMARY_COLORS, SECONDARY_COLORS } from '@/utils/colorPalette';
+
+const OPERATION_TYPE_COLORS = {
+  // HTTP Operations
+  'http.server': PRIMARY_COLORS.BLURPLE,
+  'http.client': PRIMARY_COLORS.LT_BLURPLE,
+  
+  // UI Operations
+  'ui.paint': SECONDARY_COLORS.DK_PINK,
+  'ui.mount': SECONDARY_COLORS.LT_PINK,
+  'ui.render': SECONDARY_COLORS.DK_ORANGE,
+  
+  // Database Operations
+  'db.query': PRIMARY_COLORS.DK_VIOLET,
+  'db.transaction': PRIMARY_COLORS.LT_VIOLET,
+  
+  // Cache Operations
+  'cache.get': SECONDARY_COLORS.DK_GREEN,
+  'cache.set': SECONDARY_COLORS.LT_GREEN,
+  
+  // Function Operations
+  'function.call': SECONDARY_COLORS.DK_BLUE,
+  'function.async': SECONDARY_COLORS.LT_BLUE
+};
+```
+
+## Three.js Span Visualization Examples
+
+### Span Duration Towers
+
+```typescript
+import * as THREE from 'three';
+import { SAMPLE_SPANS } from '@/data/sampleSpanData';
+
+const createSpanTowers = () => {
+  const group = new THREE.Group();
+  
+  SAMPLE_SPANS.forEach((span, index) => {
+    const height = Math.log(span.duration + 1) * 2;
+    const geometry = new THREE.BoxGeometry(0.5, height, 0.5);
+    const material = new THREE.MeshStandardMaterial({
+      color: new THREE.Color(getOperationColor(span.op))
+    });
+    
+    const tower = new THREE.Mesh(geometry, material);
+    tower.position.set(
+      (index % 20) * 1,
+      height / 2,
+      Math.floor(index / 20) * 1
+    );
+    
+    group.add(tower);
+  });
+  
+  return group;
+};
+```
+
+### Animated Span Flow
+
+```typescript
+const createAnimatedSpanFlow = () => {
+  const spansWithFlow = SAMPLE_SPANS.map(span => ({
+    ...span,
+    progress: 0,
+    flowSpeed: 1000 / span.duration // Inverse relationship
+  }));
+  
+  const animate = () => {
+    spansWithFlow.forEach(span => {
+      span.progress += span.flowSpeed * 0.016; // 60fps
+      if (span.progress > 1) span.progress = 0;
+      
+      // Update visual position based on progress
+      updateSpanVisualization(span);
+    });
+  };
+  
+  return { spansWithFlow, animate };
+};
+```
+
+## Helper Functions
+
+```typescript
+import { 
+  getSpansByProject, 
+  getSpansByOperation, 
+  getSpansByDurationRange 
+} from '@/data/sampleSpanData';
+
+// Filter spans for specific visualization needs
+const webSpans = getSpansByProject('Sentry Dashboard');
+const httpSpans = getSpansByOperation('http.server');
+const fastSpans = getSpansByDurationRange(0, 50);
+```
+
+## Performance Notes
+
+- **Total Spans**: ~1000+ spans across all datasets
+- **Traces**: 50 complete traces with hierarchical relationships  
+- **Operations**: 27 different operation types
+- **Projects**: 6 realistic project configurations
+- **Time Range**: Last 24 hours with realistic timing
+- **Relationships**: Parent-child span relationships preserved
