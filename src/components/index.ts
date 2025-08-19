@@ -5,6 +5,7 @@ export { FloatingCubesCanvas, FloatingCubes } from "./FloatingCubes";
 export { ArtisticCubesCanvas, ArtisticCubes } from "./ArtisticCubes";
 export { AlphabetSoupCanvas, AlphabetSoup } from "./AlphabetSoup";
 export { SentryLogoCanvas } from "./SentryLogo";
+export { PortalSentryLogo, PortalSentryLogoCanvas } from "./PortalSentryLogo";
 export { default as SentryDataDemo } from "./SentryDataDemo";
 export { default as SpanVisualization, SpanVisualizationCanvas } from "./SpanVisualization";
 export { default as SpanAnalyticsStats } from "./SpanAnalyticsStats";

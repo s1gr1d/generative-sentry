@@ -43,7 +43,7 @@ const AlphabetSoupCanvas: React.FC<AlphabetSoupCanvasProps> = ({
 			<div style={{ height, width: "100%", position: "relative" }}>
 				<Canvas
 					camera={{
-						position: [1000, 500, 1000],
+						position: [200, 500, 1000],
 						fov: 60,
 						near: 1,
 						far: 5000,

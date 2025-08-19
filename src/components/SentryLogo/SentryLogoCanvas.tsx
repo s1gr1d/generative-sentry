@@ -8,6 +8,7 @@ import {
 	GradientType,
 	Text3D,
 	OrbitControls,
+	Outlines,
 } from "@react-three/drei";
 import {
 	EffectComposer,
@@ -180,8 +181,10 @@ function SentryLogo({ scale = 1, autoRotate = true, rotationSpeed = 0.5 }: Sentr
 						geometry={mesh.geometry}
 						position={[mesh.position.x, mesh.position.y - 0.4, mesh.position.z]}
 						rotation={[mesh.rotation.x, mesh.rotation.y, mesh.rotation.z]}
-						scale={[mesh.scale.x * 1.5, mesh.scale.y * 1.5, mesh.scale.z * 1.5]}
+						scale={[mesh.scale.x * 3, mesh.scale.y * 3, mesh.scale.z * 3]}
 					>
+						<Outlines thickness={0.05} color={PRIMARY_COLORS.DK_BLURPLE} />
+
 						<MeshDistortMaterial distort={0.6} speed={1.2} roughness={0.2} metalness={0.8}>
 							<GradientTexture
 								stops={[0, 0.2, 0.4, 0.6, 0.8, 1]}
@@ -244,6 +247,7 @@ function SentryText() {
 				bevelSegments={5}
 			>
 				SENTRY
+				<Outlines thickness={0.05} color={SECONDARY_COLORS.DK_YELLOW} />
 				<MeshDistortMaterial distort={0.3} speed={0.8} roughness={0.1} metalness={0.9}>
 					<GradientTexture
 						stops={[0, 0.5, 1]}
@@ -286,6 +290,7 @@ function ArtText() {
 				bevelSegments={5}
 			>
 				ART
+				<Outlines thickness={0.05} color={SECONDARY_COLORS.DK_YELLOW} />
 				<MeshDistortMaterial distort={0.4} speed={1} roughness={0.15} metalness={0.7}>
 					<GradientTexture
 						stops={[0, 0.5, 1]}

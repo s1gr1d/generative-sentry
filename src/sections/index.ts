@@ -3,6 +3,8 @@ import { heroCanvasSection } from "./HeroCanvasSection";
 import { floatingCubesSection } from "./FloatingCubesSection";
 import { artisticCubesSection } from "./ArtisticCubesSection";
 import { alphabetSoupSection } from "./AlphabetSoupSection";
+import { spanSoupSection } from "./SpanSoupSection";
+import { portalSentryLogoSection } from "./PortalSentryLogoSection";
 
 import { spanDataGradientsSection } from "./SpanDataGradientsSection";
 
@@ -16,6 +18,8 @@ const sectionRegistry: SectionDefinition[] = [
 	floatingCubesSection,
 	artisticCubesSection,
 	alphabetSoupSection,
+	spanSoupSection,
+	portalSentryLogoSection,
 	spanDataGradientsSection,
 	/* sentryDataSection,*/
 	/* spanVisualizationSection,*/
