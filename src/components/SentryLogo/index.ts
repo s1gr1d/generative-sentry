@@ -1,0 +1,1 @@
+export { SentryLogoCanvas } from './SentryLogoCanvas'

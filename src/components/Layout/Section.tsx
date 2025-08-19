@@ -10,21 +10,26 @@ interface SectionProps {
 }
 
 export function Section({ id, title, bodyText, children, className }: SectionProps) {
+  // Check if this is a canvas-only section (no title or bodyText)
+  const isCanvasOnly = !title && !bodyText
+  
   return (
     <section 
-      className={`${styles.section} ${className || ''}`}
+      className={`${styles.section} ${className || ''} ${isCanvasOnly ? styles.canvasOnly : ''}`}
       data-section={id}
     >
       <div className={styles.content}>
-        <div className={styles.artContainer}>
+        <div className={isCanvasOnly ? styles.fullCanvasContainer : styles.artContainer}>
           {children}
         </div>
-        <div className={styles.textContainer}>
-          <div className={styles.textContent}>
-            <h2 className={styles.title}>{title}</h2>
-            <p className={styles.description}>{bodyText}</p>
+        {!isCanvasOnly && (
+          <div className={styles.textContainer}>
+            <div className={styles.textContent}>
+              <h2 className={styles.title}>{title}</h2>
+              <p className={styles.description}>{bodyText}</p>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   )

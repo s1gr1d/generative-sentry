@@ -1,4 +1,5 @@
 import type { SectionDefinition } from './types'
+import { heroCanvasSection } from './HeroCanvasSection'
 import { gradientWavesSection } from './GradientWavesSection'
 import { movingGradientsSection } from './MovingGradientsSection'
 import { complexGradientsSection } from './ComplexGradientsSection'
@@ -11,6 +12,7 @@ import { spanVisualizationSection } from './SpanVisualizationSection'
 
 // Registry of all available sections
 const sectionRegistry: SectionDefinition[] = [
+  heroCanvasSection,
   gradientWavesSection,
   movingGradientsSection,
   complexGradientsSection,
@@ -18,8 +20,8 @@ const sectionRegistry: SectionDefinition[] = [
   floatingCubesSection,
   artisticCubesSection,
   alphabetSoupSection,
-  sentryDataSection,
-  spanVisualizationSection,
+  /* sentryDataSection,*/
+ /* spanVisualizationSection,*/
 ]
 
 // Sort sections by order
