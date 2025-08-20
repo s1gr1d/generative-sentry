@@ -5,10 +5,9 @@ import {
 	ERROR_STATISTICS,
 	GROUPED_ERRORS_BY_TYPE,
 	GROUPED_ERRORS_BY_LEVEL,
-	generateTimeSeriesData,
 } from "@/data/sampleSentryEnvelopes";
 import type { SentryEnvelope, ErrorType } from "@/types/sentryEnvelope";
-import { COLOR_PALETTE, getRandomColor } from "@/utils/colorPalette";
+import { COLOR_PALETTE } from "@/utils/colorPalette";
 
 interface SentryDataDemoProps {
 	className?: string;

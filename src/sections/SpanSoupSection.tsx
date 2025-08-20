@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { SpanSoupCanvas } from "@/components/SpanSoup/SpanSoupCanvas";
 import { SAMPLE_SPANS } from "@/data/sampleSpanData";
 import { COLOR_PALETTE } from "@/utils/colorPalette";
 import type { SectionDefinition } from "./types";
 
-const SpanSoupSectionComponent: React.FC = () => {
+const SpanSoupSectionComponent = () => {
 	const [dataType, setDataType] = useState<"operation" | "description">("operation");
 
 	return (

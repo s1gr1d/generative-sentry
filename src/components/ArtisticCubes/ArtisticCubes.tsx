@@ -150,7 +150,6 @@ const ArtisticCubes: React.FC<ArtisticCubesProps> = ({
 						minDepthThreshold={0.9}
 						maxDepthThreshold={1}
 						distortion={cubeData.intensity}
-						distortionScale={0.5}
 					/>
 				);
 

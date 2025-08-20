@@ -1,12 +1,7 @@
 import React, { useRef, useMemo, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import {
-	COLOR_PALETTE,
-	NORMALIZED_RGB,
-	getRandomColorNames,
-	type ColorCategory,
-} from "@/utils/colorPalette";
+import { NORMALIZED_RGB, getRandomColorNames, type ColorCategory } from "@/utils/colorPalette";
 
 // Import shaders
 import atmosphereVertexShader from "@/shaders/atmosphereVertex.glsl?raw";
@@ -150,7 +145,7 @@ export const Atmosphere: React.FC<AtmosphereProps> = ({
 	}, [planetRadius, atmosphereThickness, animationSpeed, cloudColors]);
 
 	// Animation loop
-	useFrame((state, delta) => {
+	useFrame((_, delta) => {
 		if (materialRef.current) {
 			materialRef.current.uniforms.u_time.value += delta;
 		}

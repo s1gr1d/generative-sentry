@@ -49,12 +49,10 @@ function LoadingSentryLogo() {
 
 // Individual portal side component
 function PortalSide({
-	rotation = [0, 0, 0],
 	bgColor,
 	logoColor,
 	index,
 }: {
-	rotation?: [number, number, number];
 	bgColor: string;
 	logoColor: string;
 	index: number;
@@ -62,7 +60,7 @@ function PortalSide({
 	const meshRef = useRef<THREE.Mesh>(null);
 	const gltf = useGLTF("/sentry-logo-3d.glb");
 
-	useFrame((state, delta) => {
+	useFrame((_, delta) => {
 		if (meshRef.current) {
 			meshRef.current.rotation.x += delta * 0.3;
 			meshRef.current.rotation.y += delta * 0.2;
@@ -92,7 +90,7 @@ function PortalSide({
 	};
 
 	return (
-		<MeshPortalMaterial attach={`material-${index}`}>
+		<MeshPortalMaterial attach={`material-${index}`} blur={0} resolution={512}>
 			{/* Everything inside this portal is isolated */}
 			<ambientLight intensity={0.4} />
 			<Environment preset="city" />
@@ -129,7 +127,7 @@ function PortalCube({ scale = 1 }: { scale: number }) {
 	const cubeRef = useRef<THREE.Group>(null);
 
 	// Auto-rotation when not being manually controlled
-	useFrame((state, delta) => {
+	useFrame((_, delta) => {
 		if (cubeRef.current) {
 			cubeRef.current.rotation.y += delta * 0.2;
 			cubeRef.current.rotation.x += delta * 0.1;
@@ -179,7 +177,6 @@ function PortalCube({ scale = 1 }: { scale: number }) {
 				{portalConfigs.map((config, index) => (
 					<PortalSide
 						key={index}
-						rotation={config.rotation}
 						bgColor={config.bgColor}
 						logoColor={config.logoColor}
 						index={index}

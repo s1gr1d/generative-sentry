@@ -28,7 +28,6 @@ const SpanVisualization = ({ className }: SpanVisualizationProps) => {
 	const [activeView, setActiveView] = useState<"combined" | "analytics" | "visualization">(
 		"combined",
 	);
-	const [showInstructions, setShowInstructions] = useState(true);
 
 	const formatNumber = (num: number) => {
 		return new Intl.NumberFormat().format(Math.round(num));

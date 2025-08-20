@@ -8,7 +8,6 @@ import {
 	Stats,
 	AdaptiveDpr,
 	AdaptiveEvents,
-	Html,
 } from "@react-three/drei";
 import { AlphabetSoup, type AlphabetSoupProps } from "./AlphabetSoup";
 import { ErrorBoundary } from "../ErrorBoundary";

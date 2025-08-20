@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import { resolve } from "node:path";
-import { fileURLToPath, URL } from "node:url";
+import { resolve } from "path";
+import { fileURLToPath, URL } from "url";
 
 // https://vite.dev/config/
 export default defineConfig({

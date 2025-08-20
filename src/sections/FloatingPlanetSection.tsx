@@ -1,15 +1,13 @@
-import React from "react";
 import { FloatingPlanetCanvas } from "@/components/FloatingPlanet";
 import type { SectionDefinition } from "./types";
 
-export const FloatingPlanetSection: React.FC = () => {
+export const FloatingPlanetSection = () => {
 	return (
 		<FloatingPlanetCanvas
 			planetSize={400000.0}
 			assetCount={60}
 			assetSize={50000.0}
 			rotationSpeed={0.003}
-			animationSpeed={0.6}
 			colorCategory="ALL"
 			enableFloating={true}
 			enablePostProcessing={true}
@@ -25,35 +23,8 @@ export const floatingPlanetSection: SectionDefinition = {
 	title: "Floating Planet Ecosystem",
 	description:
 		"A 3D floating planet with procedurally placed vegetation and environmental assets. Features atmospheric fog, post-processing effects, and gentle orbital animations.",
+	bodyText:
+		"Showcases 3D asset management and instanced rendering with atmospheric fog effects, post-processing with bloom and depth of field, procedural asset placement on sphere surface, orbital camera controls, multiple lighting sources, shadow mapping, and instanced mesh rendering for performance optimization.",
 	component: FloatingPlanetSection,
 	order: 120,
-	category: "3D Environments",
-	tags: ["3D", "Planet", "Ecosystem", "Environment", "Vegetation", "Space", "Orbital"],
-	complexity: "Advanced",
-	interactions: ["Camera Controls", "Orbital View", "Zoom"],
-	dataVisualization: {
-		type: "Environmental",
-		description: "Represents a self-contained planetary ecosystem with diverse vegetation types",
-		dataSource: "Procedurally generated asset placement",
-		insights: [
-			"Showcases 3D asset management and instanced rendering",
-			"Demonstrates spatial distribution algorithms",
-			"Features realistic planetary surface mapping",
-			"Combines multiple 3D models in a cohesive scene",
-		],
-	},
-	performance: {
-		renderComplexity: "High",
-		interactivity: "Medium",
-		notes: "Uses instanced meshes for performance optimization with multiple assets",
-	},
-	visualFeatures: [
-		"Atmospheric fog effects",
-		"Post-processing with bloom and depth of field",
-		"Procedural asset placement on sphere surface",
-		"Orbital camera controls",
-		"Multiple lighting sources",
-		"Shadow mapping",
-		"Instanced mesh rendering",
-	],
 };
