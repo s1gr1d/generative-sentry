@@ -11,7 +11,7 @@ interface SectionProps {
 
 export function Section({ id, title, bodyText, children, className }: SectionProps) {
 	// Check if this is a canvas-only section (no title or bodyText)
-	const isCanvasOnly = !title && !bodyText;
+	const isCanvasOnly = (!title && !bodyText) || id === "hero-canvas";
 
 	return (
 		<section

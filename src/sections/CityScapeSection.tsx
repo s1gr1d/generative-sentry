@@ -4,10 +4,11 @@ import type { SectionDefinition } from "./types";
 
 export const cityScapeSection: SectionDefinition = {
 	id: "cityscape",
-	title: "Span Duration Cityscape",
+	title: "Span Blocks",
 	description: "A 3D city skyline where building heights represent span durations from Sentry data",
 	bodyText:
-		"This visualization transforms Sentry span data into an architectural cityscape. Each building's height corresponds to the span duration - taller buildings represent slower operations. Buildings are colored by operation type: blue for HTTP requests, purple for database operations, orange for UI operations, and more. Failed spans are marked with glowing red indicators on top.",
+		"A cityscape of logic, rendered on a grid,\nWhere every transaction is not just hid.\nBlue for the network, a swift HTTP,\nPurple for queries that run to the sea.\nTheir length, a duration, their color, a clue,\nRevealing the story of all that came through.",
+
 	order: 15,
 	component: () => (
 		<CityScapeCanvas

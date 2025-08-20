@@ -20,11 +20,12 @@ export const FloatingPlanetSection = () => {
 
 export const floatingPlanetSection: SectionDefinition = {
 	id: "floating-planet",
-	title: "Floating Planet Ecosystem",
+	title: "Sentry Planet",
 	description:
 		"A 3D floating planet with procedurally placed vegetation and environmental assets. Features atmospheric fog, post-processing effects, and gentle orbital animations.",
 	bodyText:
-		"Showcases 3D asset management and instanced rendering with atmospheric fog effects, post-processing with bloom and depth of field, procedural asset placement on sphere surface, orbital camera controls, multiple lighting sources, shadow mapping, and instanced mesh rendering for performance optimization.",
+		"A living graph where green trees can grow,\nOr brown withered branches begin to show.\nEach stalk an endpoint, a service well-tended,\nIts health, by the foliage, perfectly rendered.\nA world of metrics, where failure is seen,\nIn a single glimpse of the digital green.",
+
 	component: FloatingPlanetSection,
 	order: 120,
 };

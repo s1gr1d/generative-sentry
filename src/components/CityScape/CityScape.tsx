@@ -140,7 +140,7 @@ const CityScape: React.FC<CityScapeProps> = ({
 					return (
 						<group
 							key={index}
-							position={[cube.x, 0, cube.z]}
+							position={[cube.x, -400, cube.z]}
 							userData={{ span: cube.span }} // Store span data for interactions
 						>
 							{/* Main cube */}

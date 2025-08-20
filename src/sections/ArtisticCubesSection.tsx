@@ -3,10 +3,10 @@ import type { SectionDefinition } from "./types";
 
 export const artisticCubesSection: SectionDefinition = {
 	id: "artistic-cubes",
-	title: "Artistic Cubes",
+	title: "Cubes",
 	description: "floating cubes with experimental drei shaders",
 	bodyText:
-		"An experimental showcase of advanced shader materials from @react-three/drei. Features wobbling geometry, distortion effects, transmission materials, and reflective surfaces that push the boundaries of real-time 3D rendering in the browser.",
+		"A binary ballet, soft and slow.\nOne is a trace, a successful flow.\nThe other, an error, a red signal flash,\nShowing where the system began to crash.",
 	order: 6,
 	component: () => (
 		<ArtisticCubesCanvas

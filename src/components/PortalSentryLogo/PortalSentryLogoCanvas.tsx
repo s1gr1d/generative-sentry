@@ -226,7 +226,15 @@ export function PortalSentryLogoCanvas({
 
 			{!enableControls && <PortalCube scale={scale} />}
 
-			<CameraControls makeDefault />
+			<CameraControls
+				makeDefault
+				mouseButtons={{
+					left: 1, // ROTATE
+					middle: 0, // NONE
+					right: 2, // TRUCK (pan)
+					wheel: 0, // NONE (disable zoom)
+				}}
+			/>
 		</Canvas>
 	);
 }

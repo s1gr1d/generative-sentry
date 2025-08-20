@@ -49,8 +49,8 @@ const BuildingCityCanvas: React.FC<BuildingCityCanvasProps> = ({
 						bottom: frustumSize / -2,
 						near: 1,
 						far: 15000,
-						position: [cameraDistance * 0.8, cameraDistance * 0.8, cameraDistance * 0.8],
-						zoom: 1,
+						position: [cameraDistance * 0.6, cameraDistance * 0.5, cameraDistance * 0.6],
+						zoom: 2.5,
 					}}
 					gl={{
 						antialias: true,

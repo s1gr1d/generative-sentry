@@ -248,15 +248,6 @@ export function Navigation() {
 
 	return (
 		<nav className={styles.navigation}>
-			<div className={styles.header}>
-				<h1 className={styles.title}>
-					Generative
-					<br />
-					Sentry
-				</h1>
-				<p className={styles.subtitle}>Interactive Art Collection</p>
-			</div>
-
 			<ul className={styles.menu}>
 				{sections.map((section) => (
 					<li key={section.id} className={styles.menuItem}>
@@ -276,7 +267,6 @@ export function Navigation() {
 						>
 							<div className={styles.menuContent}>
 								<span className={styles.menuTitle}>{section.title}</span>
-								<span className={styles.menuDescription}>{section.description}</span>
 							</div>
 						</button>
 					</li>

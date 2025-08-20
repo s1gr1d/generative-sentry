@@ -26,10 +26,10 @@ const SpanSoupSectionComponent = () => {
 
 export const spanSoupSection: SectionDefinition = {
 	id: "span-soup",
-	title: "Span Data Soup",
+	title: "Span Soup",
 	description: "Interactive 3D visualization of Sentry span operations and descriptions",
 	bodyText:
-		"Dive into the semantic soup of your application's performance data. This visualization transforms Sentry span data into floating 3D words that you can interact with and explore. Switch between viewing span operations (like 'http.server', 'db.query') and span descriptions (meaningful words from operation details). Each word is colored based on its operation type and sized according to performance characteristics. Hover to apply forces and watch the data dance through space!",
+		"The labels of a system, a whispered plea.\nWords of a span's operation, for all to see.\nThey hover in silence, a key to the flow,\nUntil a hover makes their purpose show.",
 	order: 9, // After alphabet soup
 	component: SpanSoupSectionComponent,
 };

@@ -7,7 +7,7 @@
 	display: flex;
 	flex-direction: column;
 	position: relative;
-	overflow-y: scroll;
+	overflow-y: auto;
 }
 
 .navigation::before {
@@ -116,11 +116,11 @@
 	display: block;
 	font-size: 1rem;
 	font-weight: 600;
-	margin-bottom: 0.25rem;
 	line-height: 1.2;
 }
 
 .menuDescription {
+	margin-top: 0.25rem;
 	display: block;
 	font-size: 0.75rem;
 	opacity: 0.6;
@@ -128,10 +128,7 @@
 }
 
 .menuButton.active .menuTitle {
-	background: linear-gradient(135deg, var(--color-blurple) 0%, var(--color-lt-pink) 100%);
-	background-clip: text;
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+	color: var(--color-dk-yellow);
 }
 
 .footer {

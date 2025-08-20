@@ -222,7 +222,7 @@ function SentryLogo({ scale = 1, autoRotate = true, rotationSpeed = 0.5 }: Sentr
 }
 
 // 3D Text Components
-function SentryText() {
+function LeftText() {
 	const textRef = useRef<THREE.Group>(null);
 
 	useFrame((state) => {
@@ -234,7 +234,7 @@ function SentryText() {
 	});
 
 	return (
-		<group ref={textRef} position={[-6, 3.5, -1]} rotation={[0, 0.2, -0.15]}>
+		<group ref={textRef} position={[-9, 5, -1]} rotation={[0, 0.2, -0.15]}>
 			<Text3D
 				font="/fonts/rubik-bold.json"
 				size={0.7}
@@ -246,7 +246,7 @@ function SentryText() {
 				bevelOffset={0}
 				bevelSegments={5}
 			>
-				SENTRY
+				GENERATIVE
 				<Outlines thickness={0.05} color={SECONDARY_COLORS.DK_YELLOW} />
 				<MeshDistortMaterial distort={0.3} speed={0.8} roughness={0.1} metalness={0.9}>
 					<GradientTexture
@@ -264,7 +264,7 @@ function SentryText() {
 	);
 }
 
-function ArtText() {
+function RightText() {
 	const textRef = useRef<THREE.Group>(null);
 
 	useFrame((state) => {
@@ -289,7 +289,7 @@ function ArtText() {
 				bevelOffset={0}
 				bevelSegments={5}
 			>
-				ART
+				SENTRY
 				<Outlines thickness={0.05} color={SECONDARY_COLORS.DK_YELLOW} />
 				<MeshDistortMaterial distort={0.4} speed={1} roughness={0.15} metalness={0.7}>
 					<GradientTexture
@@ -508,8 +508,8 @@ export function SentryLogoCanvas({ scale, autoRotate, rotationSpeed }: SentryLog
 
 			{/* 3D Text */}
 			<Suspense fallback={null}>
-				<SentryText />
-				<ArtText />
+				<LeftText />
+				<RightText />
 			</Suspense>
 
 			{/* Camera controls - disabled to allow page scrolling */}

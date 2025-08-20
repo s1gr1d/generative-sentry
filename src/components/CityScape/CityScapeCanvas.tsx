@@ -48,8 +48,8 @@ const CityScapeCanvas: React.FC<CityScapeCanvasProps> = ({
 						bottom: frustumSize / -2,
 						near: 1,
 						far: 10000,
-						position: [cameraDistance * 0.7, cameraDistance * 0.7, cameraDistance * 0.7],
-						zoom: 1,
+						position: [cameraDistance * 1, cameraDistance * 0.9, cameraDistance * 0.2],
+						zoom: 1.5,
 					}}
 					gl={{
 						antialias: true,

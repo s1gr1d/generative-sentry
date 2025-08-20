@@ -9,7 +9,7 @@
 .content {
 	height: 100%;
 	display: grid;
-	grid-template-columns: 1fr 400px;
+	grid-template-columns: 1fr 500px;
 	align-items: stretch;
 }
 
@@ -85,11 +85,11 @@
 
 .description {
 	font-size: 1.125rem;
-	line-height: 1.6;
+	line-height: 2.2;
 	color: var(--color-rich-black);
 	margin: 0;
 	opacity: 0.8;
-	max-width: 300px;
+	white-space: pre-line;
 }
 
 .section:nth-child(even) .textContainer::before {

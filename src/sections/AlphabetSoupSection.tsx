@@ -4,10 +4,10 @@ import { SAMPLE_SENTRY_ENVELOPES } from "@/data/sampleSentryEnvelopes";
 
 export const alphabetSoupSection: SectionDefinition = {
 	id: "alphabet-soup",
-	title: "Alphabet Soup",
+	title: "Span Letters",
 	description: "Interactive 3D letters from Sentry error data with hover physics",
 	bodyText:
-		"Interactive 3D visualization where error data transforms into floating letters. Each character represents fragments from Sentry error messages, function names, and exception types. Hover over letters to apply directional forces and watch them dance through the digital soup!",
+		"From an uncaught exception, they break free,\nLost letters from a stack trace decree.\nA fragmented message, floating in place,\nThe source of an error, found by a trace.",
 	order: 8, // After artistic cubes
 	component: () => (
 		<AlphabetSoupCanvas

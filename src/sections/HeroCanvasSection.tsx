@@ -3,7 +3,7 @@ import type { SectionDefinition } from "./types";
 
 export const heroCanvasSection: SectionDefinition = {
 	id: "hero-canvas",
-	title: "", // No title needed for canvas-only section
+	title: "Start", // No title needed for canvas-only section
 	description: "",
 	bodyText: "", // No body text for canvas-only section
 	order: 0, // This will be the first section
