@@ -7,6 +7,8 @@ import { spanSoupSection } from "./SpanSoupSection";
 import { portalSentryLogoSection } from "./PortalSentryLogoSection";
 
 import { spanDataGradientsSection } from "./SpanDataGradientsSection";
+import { cityScapeSection } from "./CityScapeSection";
+import { buildingCitySection } from "./BuildingCitySection";
 
 // Registry of all available sections
 const sectionRegistry: SectionDefinition[] = [
@@ -15,12 +17,14 @@ const sectionRegistry: SectionDefinition[] = [
 	// movingGradientsSection,
 	// complexGradientsSection,
 	// interactiveGradientsSection,
-	floatingCubesSection,
+	//	floatingCubesSection,
 	artisticCubesSection,
 	alphabetSoupSection,
 	spanSoupSection,
 	portalSentryLogoSection,
 	spanDataGradientsSection,
+	cityScapeSection,
+	buildingCitySection,
 	/* sentryDataSection,*/
 	/* spanVisualizationSection,*/
 ];

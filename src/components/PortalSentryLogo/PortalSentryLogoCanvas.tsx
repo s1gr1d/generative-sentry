@@ -87,7 +87,7 @@ function PortalSide({
 		});
 
 		return (
-			<primitive object={clonedScene} scale={[2, 2, 2]} position={[0, -0.5, 0]} ref={meshRef} />
+			<primitive object={clonedScene} scale={[3, 3, 3]} position={[0, -0.5, 0]} ref={meshRef} />
 		);
 	};
 
@@ -98,7 +98,7 @@ function PortalSide({
 			<Environment preset="city" />
 
 			{/* Background sphere with portal color */}
-			<mesh scale={[50, 50, 50]} position={[0, 0, -25]}>
+			<mesh scale={[100, 100, 100]} position={[0, 0, -25]}>
 				<sphereGeometry args={[1, 32, 32]} />
 				<meshBasicMaterial color={bgColor} side={THREE.BackSide} />
 			</mesh>
