@@ -12,3 +12,4 @@ export { default as SpanAnalyticsStats } from "./SpanAnalyticsStats";
 export { SpanDataGradients } from "./SpanDataGradients";
 export { CityScape, CityScapeCanvas } from "./CityScape";
 export { BuildingCity, BuildingCityCanvas } from "./BuildingCity";
+export { FloatingPlanet, FloatingPlanetCanvas } from "./FloatingPlanet";

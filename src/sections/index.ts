@@ -1,6 +1,5 @@
 import type { SectionDefinition } from "./types";
 import { heroCanvasSection } from "./HeroCanvasSection";
-import { floatingCubesSection } from "./FloatingCubesSection";
 import { artisticCubesSection } from "./ArtisticCubesSection";
 import { alphabetSoupSection } from "./AlphabetSoupSection";
 import { spanSoupSection } from "./SpanSoupSection";
@@ -9,6 +8,7 @@ import { portalSentryLogoSection } from "./PortalSentryLogoSection";
 import { spanDataGradientsSection } from "./SpanDataGradientsSection";
 import { cityScapeSection } from "./CityScapeSection";
 import { buildingCitySection } from "./BuildingCitySection";
+import { floatingPlanetSection } from "./FloatingPlanetSection";
 
 // Registry of all available sections
 const sectionRegistry: SectionDefinition[] = [
@@ -25,6 +25,7 @@ const sectionRegistry: SectionDefinition[] = [
 	spanDataGradientsSection,
 	cityScapeSection,
 	buildingCitySection,
+	floatingPlanetSection,
 	/* sentryDataSection,*/
 	/* spanVisualizationSection,*/
 ];
