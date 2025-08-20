@@ -1,1 +1,12 @@
 /// <reference types="vite/client" />
+
+// GLSL shader module declarations
+declare module "*.glsl?raw" {
+	const content: string;
+	export default content;
+}
+
+declare module "*.glsl" {
+	const content: string;
+	export default content;
+}

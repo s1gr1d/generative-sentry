@@ -6,7 +6,7 @@ export const FloatingPlanetSection: React.FC = () => {
 	return (
 		<FloatingPlanetCanvas
 			planetSize={400000.0}
-			assetCount={20}
+			assetCount={60}
 			assetSize={50000.0}
 			rotationSpeed={0.003}
 			animationSpeed={0.6}

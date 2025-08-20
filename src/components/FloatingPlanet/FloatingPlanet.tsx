@@ -3,6 +3,7 @@ import { useFrame } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import { COLOR_PALETTE, getRandomColorNames, type ColorCategory } from "@/utils/colorPalette";
+import { Atmosphere } from "./Atmosphere";
 
 export interface FloatingPlanetProps {
 	/** Planet size multiplier (default: 1.0) */
@@ -17,6 +18,12 @@ export interface FloatingPlanetProps {
 	colorCategory?: ColorCategory;
 	/** Enable gentle floating animation for assets (default: true) */
 	enableFloating?: boolean;
+	/** Enable atmospheric effects around the planet (default: true) */
+	enableAtmosphere?: boolean;
+	/** Number of atmospheric particles (default: 800) */
+	atmosphereParticleCount?: number;
+	/** Color category for atmospheric clouds (default: 'COOL') */
+	atmosphereColorCategory?: ColorCategory;
 }
 
 // Asset model paths
@@ -125,8 +132,6 @@ const createAssetMaterial = (
 			map: (originalMaterial as any).map,
 			normalMap: (originalMaterial as any).normalMap,
 			roughnessMap: (originalMaterial as any).roughnessMap,
-			metalnessMap: (originalMaterial as any).metalnessMap,
-			color: overlayColor,
 			transparent: false, // Better performance
 			metalness: 0.2,
 			roughness: 0.5, // More reflective
@@ -254,6 +259,9 @@ export const FloatingPlanet: React.FC<FloatingPlanetProps> = ({
 	rotationSpeed = 0.002,
 	colorCategory = "ALL",
 	enableFloating = true,
+	enableAtmosphere = true,
+	atmosphereParticleCount = 800,
+	atmosphereColorCategory = "COOL",
 }) => {
 	const planetGroupRef = useRef<THREE.Group>(null);
 	const assetGroupRef = useRef<THREE.Group>(null);
@@ -359,6 +367,19 @@ export const FloatingPlanet: React.FC<FloatingPlanetProps> = ({
 				planetModels={planetModels}
 				assetGroupRef={assetGroupRef as React.RefObject<THREE.Group | null>}
 			/>
+
+			{/* Atmospheric clouds */}
+			{enableAtmosphere && (
+				<Atmosphere
+					planetRadius={100} // Slightly larger than planet for visible separation
+					atmosphereThickness={planetSize * 0.25} // Thicker atmosphere for visibility
+					particleCount={atmosphereParticleCount}
+					animationSpeed={rotationSpeed * 50}
+					colorCategory={atmosphereColorCategory}
+					minParticleSize={0.01} // Much larger particles
+					maxParticleSize={0.05} // Much larger particles
+				/>
+			)}
 		</group>
 	);
 };

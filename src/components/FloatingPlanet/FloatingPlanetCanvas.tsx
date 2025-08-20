@@ -207,10 +207,10 @@ const FloatingPlanetCanvas: React.FC<FloatingPlanetCanvasProps> = ({
 							<ChromaticAberration offset={[0.0005, 0.0005]} />
 
 							{/* Depth of field for cinematic focus */}
-							<DepthOfField focusDistance={0.02} focalLength={0.05} bokehScale={2} height={480} />
+							<DepthOfField focusDistance={0.8} focalLength={0.5} bokehScale={2} height={480} />
 
 							{/* Subtle film grain */}
-							<Noise opacity={0.03} />
+							<Noise opacity={0.02} />
 						</EffectComposer>
 					)}
 
