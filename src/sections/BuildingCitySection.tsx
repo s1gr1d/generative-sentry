@@ -8,7 +8,7 @@ export const buildingCitySection: SectionDefinition = {
 	description:
 		"A 3D city built from architectural models where building types represent span durations",
 	bodyText:
-		"The data architects built this town,\nWhere spans are houses, and all can look down.\nThe tall ones are slow, where the system must wait,\nThe small ones are quick, sealed by a fast fate.\nEach building a function, a microservice line,\nMapped by the data of Sentry's design.",
+		"A city of data, that Sentry has built.\nWhere glowing red beacons mark all of the guilt.\nThe tall buildings slow, the system must wait,\nThe small ones are quick, sealed by a fast fate.",
 
 	order: 16,
 	component: () => (

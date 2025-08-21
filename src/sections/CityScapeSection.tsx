@@ -7,7 +7,7 @@ export const cityScapeSection: SectionDefinition = {
 	title: "Span Blocks",
 	description: "A 3D city skyline where building heights represent span durations from Sentry data",
 	bodyText:
-		"A cityscape of logic, rendered on a grid,\nWhere every transaction is not just hid.\nBlue for the network, a swift HTTP,\nPurple for queries that run to the sea.\nTheir length, a duration, their color, a clue,\nRevealing the story of all that came through.",
+		"An architectural grid, where transactions alight.\nTheir height is their timing, their color their light.\nBlue for the network, a swift HTTP,\nPurple for queries that run to the sea.",
 
 	order: 15,
 	component: () => (

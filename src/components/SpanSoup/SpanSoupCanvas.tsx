@@ -46,7 +46,7 @@ const SpanSoupCanvas: React.FC<SpanSoupCanvasProps> = ({
 	dataType = "operation",
 	...spanSoupProps
 }) => {
-	const [isPanelCollapsed, setIsPanelCollapsed] = useState(false);
+	const [isPanelCollapsed, setIsPanelCollapsed] = useState(true);
 	const [currentDataType, setCurrentDataType] = useState<"operation" | "description">(dataType);
 
 	const handleDataTypeChange = (newDataType: "operation" | "description") => {

@@ -24,7 +24,7 @@ export const floatingPlanetSection: SectionDefinition = {
 	description:
 		"A 3D floating planet with procedurally placed vegetation and environmental assets. Features atmospheric fog, post-processing effects, and gentle orbital animations.",
 	bodyText:
-		"A living graph where green trees can grow,\nOr brown withered branches begin to show.\nEach stalk an endpoint, a service well-tended,\nIts health, by the foliage, perfectly rendered.\nA world of metrics, where failure is seen,\nIn a single glimpse of the digital green.",
+		"The state of a system, a sphere made to bloom.\nA living landscape dispelling all gloom.\nLush green for the healthy, a digital lawn,\nBut withering failure, a new digital dawn.",
 
 	component: FloatingPlanetSection,
 	order: 120,

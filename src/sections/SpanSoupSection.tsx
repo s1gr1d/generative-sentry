@@ -29,7 +29,7 @@ export const spanSoupSection: SectionDefinition = {
 	title: "Span Soup",
 	description: "Interactive 3D visualization of Sentry span operations and descriptions",
 	bodyText:
-		"The labels of a system, a whispered plea.\nWords of a span's operation, for all to see.\nThey hover in silence, a key to the flow,\nUntil a hover makes their purpose show.",
+		"The semantic soup, where code finds its words,\nA hovering chaos of beautiful birds.\nOPs and descriptions, in hues of their kind,\nA dance of latency, for all to find.",
 	order: 9, // After alphabet soup
 	component: SpanSoupSectionComponent,
 };
