@@ -9,6 +9,7 @@ import { spanDataGradientsSection } from "./SpanDataGradientsSection";
 import { cityScapeSection } from "./CityScapeSection";
 import { buildingCitySection } from "./BuildingCitySection";
 import { floatingPlanetSection } from "./FloatingPlanetSection";
+import { noiseArtworkSection } from "./NoiseArtworkSection";
 
 // Registry of all available sections
 const sectionRegistry: SectionDefinition[] = [
@@ -26,6 +27,7 @@ const sectionRegistry: SectionDefinition[] = [
 	cityScapeSection,
 	buildingCitySection,
 	floatingPlanetSection,
+	noiseArtworkSection,
 	/* sentryDataSection,*/
 	/* spanVisualizationSection,*/
 ];

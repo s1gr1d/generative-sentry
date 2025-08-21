@@ -1,4 +1,3 @@
-import { SpanDataGradients } from "@/components/SpanDataGradients";
 import type { SectionDefinition } from "./types";
 import { MovingGradientCanvas } from "@/components/MovingGradient/MovingGradientCanvas";
 
@@ -24,6 +23,6 @@ export const spanDataGradientsSection: SectionDefinition = {
 			width={8}
 			height={6}
 		/>
-		//<SpanDataGradients layerCount={2} showLabels={true} regenerationKey={Date.now()} />
+		// <SpanDataGradients layerCount={2} showLabels={true} regenerationKey={Date.now()} />
 	),
 };

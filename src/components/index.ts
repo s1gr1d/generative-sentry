@@ -13,3 +13,4 @@ export { SpanDataGradients } from "./SpanDataGradients";
 export { CityScape, CityScapeCanvas } from "./CityScape";
 export { BuildingCity, BuildingCityCanvas } from "./BuildingCity";
 export { FloatingPlanet, FloatingPlanetCanvas } from "./FloatingPlanet";
+export { NoiseArtwork } from "./NoiseArtwork";

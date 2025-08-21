@@ -1,0 +1,240 @@
+.container {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	background: var(--color-rich-black, #181225);
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.canvas {
+	position: relative;
+	cursor: pointer;
+	transition: transform 0.2s ease;
+}
+
+.canvas:hover {
+	transform: scale(1.02);
+}
+
+.canvas:active {
+	transform: scale(0.98);
+}
+
+.instructions {
+	position: absolute;
+	bottom: 16px;
+	left: 50%;
+	transform: translateX(-50%);
+	color: var(--color-lt-blurple, #9e86ff);
+	font-size: 14px;
+	font-weight: 500;
+	background: rgba(24, 18, 37, 0.8);
+	padding: 8px 16px;
+	border-radius: 20px;
+	backdrop-filter: blur(10px);
+	border: 1px solid rgba(158, 134, 255, 0.3);
+	opacity: 0.8;
+	transition: opacity 0.3s ease;
+	pointer-events: none;
+}
+
+.container:hover .instructions {
+	opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+	.canvas {
+		width: 100%;
+		height: auto;
+	}
+
+	.instructions {
+		font-size: 12px;
+		padding: 6px 12px;
+		bottom: 12px;
+	}
+}
+
+/* Controls panel */
+.controls {
+	background: rgba(24, 18, 37, 0.95);
+	border: 1px solid rgba(158, 134, 255, 0.3);
+	border-radius: 12px;
+	padding: 20px;
+	margin: 20px 0;
+	backdrop-filter: blur(10px);
+	max-width: 400px;
+	width: 100%;
+}
+
+.controlsTitle {
+	color: var(--color-lt-blurple, #9e86ff);
+	font-size: 18px;
+	font-weight: 600;
+	margin: 0 0 16px 0;
+	text-align: center;
+}
+
+.controlGroup {
+	margin-bottom: 16px;
+}
+
+.controlLabel {
+	display: block;
+	color: var(--color-lt-violet, #6e47ae);
+	font-size: 14px;
+	font-weight: 500;
+	margin-bottom: 8px;
+}
+
+.slider {
+	width: 100%;
+	height: 6px;
+	border-radius: 3px;
+	background: rgba(110, 71, 174, 0.3);
+	outline: none;
+	appearance: none;
+	cursor: pointer;
+}
+
+.slider::-webkit-slider-thumb {
+	appearance: none;
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	background: var(--color-blurple, #7553ff);
+	cursor: pointer;
+	border: 2px solid var(--color-lt-blurple, #9e86ff);
+	transition: all 0.2s ease;
+}
+
+.slider::-webkit-slider-thumb:hover {
+	background: var(--color-lt-blurple, #9e86ff);
+	transform: scale(1.1);
+}
+
+.slider::-moz-range-thumb {
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	background: var(--color-blurple, #7553ff);
+	cursor: pointer;
+	border: 2px solid var(--color-lt-blurple, #9e86ff);
+	transition: all 0.2s ease;
+}
+
+.select {
+	width: 100%;
+	padding: 8px 12px;
+	background: rgba(24, 18, 37, 0.8);
+	border: 1px solid rgba(158, 134, 255, 0.5);
+	border-radius: 6px;
+	color: var(--color-lt-blurple, #9e86ff);
+	font-size: 14px;
+	cursor: pointer;
+	outline: none;
+}
+
+.select:focus {
+	border-color: var(--color-blurple, #7553ff);
+}
+
+.actionButtons {
+	display: flex;
+	gap: 12px;
+	margin-top: 20px;
+}
+
+.regenerateButton {
+	flex: 1;
+	padding: 12px 20px;
+	background: linear-gradient(
+		135deg,
+		var(--color-blurple, #7553ff),
+		var(--color-lt-purple, #a737b4)
+	);
+	border: none;
+	border-radius: 8px;
+	color: white;
+	font-size: 14px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	outline: none;
+}
+
+.regenerateButton:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(117, 83, 255, 0.4);
+}
+
+.regenerateButton:active {
+	transform: translateY(0);
+}
+
+.controls .instructions {
+	position: static;
+	background: transparent;
+	padding: 16px 0 0 0;
+	border: none;
+	border-radius: 0;
+	backdrop-filter: none;
+	opacity: 1;
+	color: rgba(158, 134, 255, 0.8);
+	font-size: 12px;
+	text-align: center;
+	transform: none;
+	pointer-events: auto;
+}
+
+.controls .instructions p {
+	margin: 4px 0;
+	line-height: 1.4;
+}
+
+/* Interactive layout for artifact mode */
+.artifactContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 20px;
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+.artifactCanvas {
+	flex-shrink: 0;
+}
+
+@media (min-width: 1024px) {
+	.artifactContainer {
+		flex-direction: row;
+		align-items: flex-start;
+		justify-content: center;
+	}
+
+	.artifactCanvas {
+		margin-right: 20px;
+	}
+}
+
+/* Screen reader only class */
+.srOnly {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
