@@ -156,9 +156,22 @@ export const NoiseArtwork: React.FC<NoiseArtworkProps> = ({
 	}, [width, height, backgroundColor]);
 
 	return (
-		<div className={`${styles.container} ${className || ""}`}>
-			<div ref={containerRef} className={styles.canvas} />
-			<div className={styles.instructions}>Click to regenerate the artwork</div>
+		<div className={className || ""}>
+			<div className={styles.container}>
+				<div ref={containerRef} className={styles.canvas} />
+			</div>
+
+			<div className={styles.buttonContainer}>
+				<div className={styles.instructions}>Click to regenerate the artwork</div>
+				<a
+					href="https://claude.ai/remixv2?uuid=015f472a-c8e0-4fa1-98f0-c0b7bad41de6"
+					target="_blank"
+					rel="noopener noreferrer"
+					className={styles.modifyButton}
+				>
+					Modify in Claude
+				</a>
+			</div>
 		</div>
 	);
 };

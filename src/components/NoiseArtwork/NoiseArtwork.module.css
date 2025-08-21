@@ -26,10 +26,6 @@
 }
 
 .instructions {
-	position: absolute;
-	bottom: 16px;
-	left: 50%;
-	transform: translateX(-50%);
 	color: var(--color-lt-blurple, #9e86ff);
 	font-size: 14px;
 	font-weight: 500;
@@ -40,11 +36,56 @@
 	border: 1px solid rgba(158, 134, 255, 0.3);
 	opacity: 0.8;
 	transition: opacity 0.3s ease;
-	pointer-events: none;
+	text-align: center;
 }
 
-.container:hover .instructions {
-	opacity: 1;
+.buttonContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 16px;
+	margin-top: 16px;
+	flex-wrap: wrap;
+}
+
+.modifyButton {
+	background: linear-gradient(
+		135deg,
+		var(--color-blurple, #7553ff),
+		var(--color-lt-purple, #a737b4)
+	);
+	color: white;
+	border: 1px solid rgba(158, 134, 255, 0.3);
+	padding: 8px 16px;
+	border-radius: 20px;
+	font-size: 14px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	text-decoration: none;
+	display: inline-block;
+	backdrop-filter: blur(10px);
+	outline: none;
+	text-align: center;
+}
+
+.modifyButton:hover {
+	background: linear-gradient(
+		135deg,
+		var(--color-lt-blurple, #9e86ff),
+		var(--color-lt-pink, #ff70bc)
+	);
+	border-color: rgba(158, 134, 255, 0.5);
+	transform: translateY(-1px);
+}
+
+.modifyButton:active {
+	transform: translateY(0);
+}
+
+.modifyButton:focus {
+	border-color: var(--color-blurple, #7553ff);
+	box-shadow: 0 0 0 2px rgba(117, 83, 255, 0.3);
 }
 
 /* Responsive adjustments */
@@ -57,7 +98,16 @@
 	.instructions {
 		font-size: 12px;
 		padding: 6px 12px;
-		bottom: 12px;
+	}
+
+	.buttonContainer {
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	.modifyButton {
+		font-size: 12px;
+		padding: 6px 12px;
 	}
 }
 

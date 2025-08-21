@@ -14,26 +14,27 @@ import { noiseArtworkSection } from "./NoiseArtworkSection";
 // Registry of all available sections
 const sectionRegistry: SectionDefinition[] = [
 	heroCanvasSection,
-	//  gradientWavesSection,
-	// movingGradientsSection,
-	// complexGradientsSection,
-	// interactiveGradientsSection,
-	//	floatingCubesSection,
-	artisticCubesSection,
+	portalSentryLogoSection,
 	alphabetSoupSection,
 	spanSoupSection,
-	portalSentryLogoSection,
 	spanDataGradientsSection,
 	cityScapeSection,
 	buildingCitySection,
 	floatingPlanetSection,
 	noiseArtworkSection,
+	//  gradientWavesSection,
+	// movingGradientsSection,
+	// complexGradientsSection,
+	// interactiveGradientsSection,
+	//	floatingCubesSection,
+	// artisticCubesSection,
+
 	/* sentryDataSection,*/
 	/* spanVisualizationSection,*/
 ];
 
 // Sort sections by order
-export const sections = sectionRegistry.sort((a, b) => a.order - b.order);
+export const sections = sectionRegistry; // .sort((a, b) => a.order - b.order);
 
 // Helper function to get section by ID
 export const getSectionById = (id: string): SectionDefinition | undefined => {
